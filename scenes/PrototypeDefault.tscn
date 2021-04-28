@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
 [ext_resource path="res://gdscript/Resource.gd" type="Script" id=2]
@@ -12,146 +12,320 @@
 [ext_resource path="res://sprites/prototype/interaction_cursor.png" type="Texture" id=10]
 [ext_resource path="res://gdscript/UI/ResourcePanel.gd" type="Script" id=11]
 [ext_resource path="res://gdscript/UI/BuildMenu.gd" type="Script" id=12]
+[ext_resource path="res://gdscript/WaveSpawner.gd" type="Script" id=13]
+[ext_resource path="res://gdscript/UI/DifficultyPanel.gd" type="Script" id=14]
+[ext_resource path="res://gdscript/Home.gd" type="Script" id=15]
+[ext_resource path="res://gdscript/UI/InteractionLabel.gd" type="Script" id=16]
+[ext_resource path="res://sprites/prototype/towers_categorie_card.png" type="Texture" id=17]
+[ext_resource path="res://sprites/prototype/pixel.png" type="Texture" id=18]
+[ext_resource path="res://sprites/prototype/card_back.png" type="Texture" id=19]
+[ext_resource path="res://sprites/prototype/resource_menu_panel.png" type="Texture" id=20]
+[ext_resource path="res://sprites/prototype/gold.png" type="Texture" id=21]
+[ext_resource path="res://scenes/Resources/Stone.tscn" type="PackedScene" id=22]
+[ext_resource path="res://sprites/prototype/path_straight.png" type="Texture" id=23]
+[ext_resource path="res://scenes/Resources/Tree.tscn" type="PackedScene" id=24]
+[ext_resource path="res://gdscript/UI/TowerUpgradeMenu.gd" type="Script" id=25]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=1]
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=2]
 radius = 19.3438
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="Animation" id=6]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Walk"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( -1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 7.0, -7.0 ]
+}
 
 [sub_resource type="RectangleShape2D" id=3]
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 23.8362, 4.79984 )
+
+[sub_resource type="RectangleShape2D" id=5]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="YSort" type="YSort" parent="."]
+[node name="Entities" type="YSort" parent="."]
 
-[node name="Player" type="KinematicBody2D" parent="YSort"]
+[node name="Player" type="KinematicBody2D" parent="Entities"]
 position = Vector2( 8, 8 )
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="YSort/Player"]
+[node name="Sprite" type="Sprite" parent="Entities/Player"]
+position = Vector2( -1, 0 )
+rotation = -0.174533
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Player"]
+position = Vector2( 0, 2.76332 )
 scale = Vector2( 0.6, 0.6 )
 shape = SubResource( 1 )
 
-[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
+[node name="Camera2D" type="Camera2D" parent="Entities/Player"]
 current = true
 zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
 smoothing_speed = 15.0
 
-[node name="BuildCursor" type="Sprite" parent="YSort/Player"]
+[node name="BuildCursor" type="Sprite" parent="Entities/Player"]
 modulate = Color( 1, 1, 1, 0.784314 )
 z_index = -1
 texture = ExtResource( 8 )
 
-[node name="InteractionCursor" type="Sprite" parent="YSort/Player"]
+[node name="InteractionCursor" type="Sprite" parent="Entities/Player"]
 modulate = Color( 1, 1, 1, 0.784314 )
 position = Vector2( 0, -14 )
+z_index = 10
 texture = ExtResource( 10 )
 
-[node name="InteractionRadius" type="Area2D" parent="YSort/Player"]
+[node name="InteractionRadius" type="Area2D" parent="Entities/Player"]
+collision_layer = 3
+collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Player/InteractionRadius"]
-shape = SubResource( 4 )
-
-[node name="Tree" type="StaticBody2D" parent="YSort"]
-position = Vector2( 56, 8 )
-script = ExtResource( 2 )
-resource_name = "wood"
-
-[node name="Sprite" type="Sprite" parent="YSort/Tree"]
-texture = ExtResource( 5 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Tree"]
-scale = Vector2( 0.8, 0.8 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Player/InteractionRadius"]
 shape = SubResource( 2 )
 
-[node name="Shadow" type="Sprite" parent="YSort/Tree"]
-modulate = Color( 1, 1, 1, 0.313726 )
-position = Vector2( 0, 2 )
-z_index = -2
-texture = ExtResource( 6 )
+[node name="InteractionChargeBackground" type="Sprite" parent="Entities/Player"]
+visible = false
+self_modulate = Color( 0.25098, 0.25098, 0.25098, 1 )
+position = Vector2( 0, -11.0291 )
+scale = Vector2( 1, 0.2 )
+texture = ExtResource( 18 )
 
-[node name="Interactable" type="Node2D" parent="YSort/Tree"]
+[node name="InteractionChargeBar" type="Sprite" parent="Entities/Player"]
+visible = false
+self_modulate = Color( 0.796078, 1, 0.694118, 1 )
+position = Vector2( 0, -11.0291 )
+scale = Vector2( 1, 0.2 )
+texture = ExtResource( 18 )
 
-[node name="Tree2" type="StaticBody2D" parent="YSort"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Entities/Player"]
+autoplay = "Idle"
+anims/Idle = SubResource( 6 )
+anims/Walk = SubResource( 7 )
+
+[node name="Tree" parent="Entities" instance=ExtResource( 24 )]
+position = Vector2( 152, -88 )
+
+[node name="Tree2" type="StaticBody2D" parent="Entities"]
 position = Vector2( 72, 8 )
 script = ExtResource( 2 )
 resource_name = "wood"
 
-[node name="Sprite" type="Sprite" parent="YSort/Tree2"]
+[node name="Sprite" type="Sprite" parent="Entities/Tree2"]
 texture = ExtResource( 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Tree2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Tree2"]
 scale = Vector2( 0.8, 0.8 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
-[node name="Shadow" type="Sprite" parent="YSort/Tree2"]
+[node name="Shadow" type="Sprite" parent="Entities/Tree2"]
 modulate = Color( 1, 1, 1, 0.313726 )
 position = Vector2( 0, 2 )
 z_index = -2
 texture = ExtResource( 6 )
 
-[node name="Interactable" type="Node2D" parent="YSort/Tree2"]
+[node name="Interactable" type="Node2D" parent="Entities/Tree2"]
 
-[node name="Tree3" type="StaticBody2D" parent="YSort"]
-position = Vector2( 72, 40 )
+[node name="Tree3" type="StaticBody2D" parent="Entities"]
+position = Vector2( 88, 104 )
 script = ExtResource( 2 )
 resource_name = "wood"
 
-[node name="Sprite" type="Sprite" parent="YSort/Tree3"]
+[node name="Sprite" type="Sprite" parent="Entities/Tree3"]
 texture = ExtResource( 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Tree3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Tree3"]
 scale = Vector2( 0.8, 0.8 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
-[node name="Shadow" type="Sprite" parent="YSort/Tree3"]
+[node name="Shadow" type="Sprite" parent="Entities/Tree3"]
 modulate = Color( 1, 1, 1, 0.313726 )
 position = Vector2( 0, 2 )
 z_index = -2
 texture = ExtResource( 6 )
 
-[node name="Interactable" type="Node2D" parent="YSort/Tree3"]
+[node name="Interactable" type="Node2D" parent="Entities/Tree3"]
 
-[node name="Stone" type="StaticBody2D" parent="YSort"]
-position = Vector2( -40, 8 )
+[node name="Tree4" type="StaticBody2D" parent="Entities"]
+position = Vector2( 120, 136 )
+script = ExtResource( 2 )
+resource_name = "wood"
+
+[node name="Sprite" type="Sprite" parent="Entities/Tree4"]
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Tree4"]
+scale = Vector2( 0.8, 0.8 )
+shape = SubResource( 3 )
+
+[node name="Shadow" type="Sprite" parent="Entities/Tree4"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 0, 2 )
+z_index = -2
+texture = ExtResource( 6 )
+
+[node name="Interactable" type="Node2D" parent="Entities/Tree4"]
+
+[node name="Stone" parent="Entities" instance=ExtResource( 22 )]
+position = Vector2( -168, -56 )
+
+[node name="Stone2" type="StaticBody2D" parent="Entities"]
+position = Vector2( -56, 8 )
 script = ExtResource( 2 )
 resource_name = "stone"
 
-[node name="Sprite" type="Sprite" parent="YSort/Stone"]
+[node name="Sprite" type="Sprite" parent="Entities/Stone2"]
 texture = ExtResource( 9 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Stone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Stone2"]
 scale = Vector2( 0.8, 0.8 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
-[node name="Shadow" type="Sprite" parent="YSort/Stone"]
+[node name="Shadow" type="Sprite" parent="Entities/Stone2"]
 modulate = Color( 1, 1, 1, 0.313726 )
 position = Vector2( 0, -1.4808 )
 z_index = -2
 texture = ExtResource( 6 )
 
-[node name="Interactable" type="Node2D" parent="YSort/Stone"]
+[node name="Interactable" type="Node2D" parent="Entities/Stone2"]
 
-[node name="Home" type="StaticBody2D" parent="YSort"]
-position = Vector2( 8, -32 )
+[node name="Stone3" type="StaticBody2D" parent="Entities"]
+position = Vector2( -120, 72 )
+script = ExtResource( 2 )
+resource_name = "stone"
 
-[node name="Sprite" type="Sprite" parent="YSort/Home"]
-texture = ExtResource( 4 )
+[node name="Sprite" type="Sprite" parent="Entities/Stone3"]
+texture = ExtResource( 9 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Home"]
-position = Vector2( 0, 10.4284 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Stone3"]
+scale = Vector2( 0.8, 0.8 )
 shape = SubResource( 3 )
 
-[node name="Interactable" type="Node2D" parent="YSort/Home"]
+[node name="Shadow" type="Sprite" parent="Entities/Stone3"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 0, -1.4808 )
+z_index = -2
+texture = ExtResource( 6 )
+
+[node name="Interactable" type="Node2D" parent="Entities/Stone3"]
+
+[node name="Stone4" type="StaticBody2D" parent="Entities"]
+position = Vector2( -168, 40 )
+script = ExtResource( 2 )
+resource_name = "stone"
+
+[node name="Sprite" type="Sprite" parent="Entities/Stone4"]
+texture = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Stone4"]
+scale = Vector2( 0.8, 0.8 )
+shape = SubResource( 3 )
+
+[node name="Shadow" type="Sprite" parent="Entities/Stone4"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 0, -1.4808 )
+z_index = -2
+texture = ExtResource( 6 )
+
+[node name="Interactable" type="Node2D" parent="Entities/Stone4"]
+
+[node name="Home" type="StaticBody2D" parent="Entities"]
+position = Vector2( 8, -32 )
+script = ExtResource( 15 )
+
+[node name="Sprite" type="Sprite" parent="Entities/Home"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Home"]
+position = Vector2( 0, 10.4284 )
+shape = SubResource( 4 )
+
+[node name="Interactable" type="Node2D" parent="Entities/Home"]
+
+[node name="EnemyHitArea" type="Area2D" parent="Entities/Home"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Home/EnemyHitArea"]
+position = Vector2( 0, 10.387 )
+shape = SubResource( 5 )
+
+[node name="HealthBarBackground" type="Sprite" parent="Entities/Home"]
+visible = false
+self_modulate = Color( 0.129412, 0.129412, 0.129412, 1 )
+position = Vector2( 0, -16 )
+scale = Vector2( 1, 0.2 )
+z_index = -1
+texture = ExtResource( 18 )
+
+[node name="HealthBar" type="Sprite" parent="Entities/Home/HealthBarBackground"]
+self_modulate = Color( 0.164706, 0.290196, 0.862745, 1 )
+z_index = 1
+texture = ExtResource( 18 )
+
+[node name="WaveSpawner" type="Node2D" parent="Entities"]
+position = Vector2( 8, 200 )
+script = ExtResource( 13 )
+
+[node name="Path8" type="Sprite" parent="Entities"]
+position = Vector2( 8, 240 )
+z_index = -4
+texture = ExtResource( 23 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 512 )
 
 [node name="BackgroundGrid" type="TileMap" parent="."]
 z_index = -5
@@ -162,7 +336,8 @@ tile_data = PoolIntArray( -1048604, 0, 0, -1048603, 0, 0, -1048602, 0, 0, -10486
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PrototypeResourcePanel" type="Panel" parent="CanvasLayer"]
+[node name="PrototypeResourcePanel" type="Control" parent="CanvasLayer"]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.490196 )
 margin_right = 200.0
 margin_bottom = 200.0
@@ -171,7 +346,71 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PrototypeResourcePanel"]
+margin_right = 128.0
+margin_bottom = 128.0
+texture = ExtResource( 20 )
+expand = true
+stretch_mode = 5
+
+[node name="wood_icon" type="TextureRect" parent="CanvasLayer/PrototypeResourcePanel"]
+margin_left = 16.0887
+margin_top = 7.74641
+margin_right = 36.0887
+margin_bottom = 27.7464
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="stone_icon" type="TextureRect" parent="CanvasLayer/PrototypeResourcePanel"]
+margin_left = 16.0887
+margin_top = 40.2218
+margin_right = 36.0887
+margin_bottom = 60.2218
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gold_icon" type="TextureRect" parent="CanvasLayer/PrototypeResourcePanel"]
+margin_left = 16.0887
+margin_top = 70.9095
+margin_right = 36.0887
+margin_bottom = 90.9095
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label" type="Label" parent="CanvasLayer/PrototypeResourcePanel"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 40.0
+margin_top = 10.0
+margin_right = 115.0
+margin_bottom = 110.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DifficultyPanel" type="Panel" parent="CanvasLayer"]
+self_modulate = Color( 1, 1, 1, 0.490196 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -200.0
+margin_bottom = 200.0
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/DifficultyPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -182,23 +421,178 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PrototypeBuildMenu" type="Panel" parent="CanvasLayer"]
-anchor_top = 0.9
+[node name="PrototypeBuildMenu" type="Control" parent="CanvasLayer"]
+anchor_top = 0.7
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 12 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Label" type="Label" parent="CanvasLayer/PrototypeBuildMenu"]
+[node name="TopLabel" type="Label" parent="CanvasLayer/PrototypeBuildMenu"]
+self_modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
 margin_top = 10.0
 margin_right = -10.0
-margin_bottom = -10.0
+margin_bottom = -35.0
 text = "Build Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Categories" type="Control" parent="CanvasLayer/PrototypeBuildMenu"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Categories"]
+anchor_left = 0.05
+anchor_top = 1.0
+anchor_right = 0.05
+anchor_bottom = 1.0
+margin_top = -128.0
+margin_right = 128.0
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Categories/TextureRect"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 31.1269
+margin_top = 98.794
+margin_right = 96.1269
+margin_bottom = 112.794
+text = "(1) Towers"
+align = 1
+valign = 1
+
+[node name="Towers" type="Control" parent="CanvasLayer/PrototypeBuildMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Basic Tower" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Towers"]
+anchor_left = 0.05
+anchor_top = 1.0
+anchor_right = 0.05
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = -128.0
+margin_right = 256.0
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Towers/Basic Tower"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 18.2664
+margin_top = 110.126
+margin_right = 114.266
+margin_bottom = 124.126
+text = "(1) Basic Tower"
+align = 1
+valign = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Towers/Basic Tower"]
+margin_left = 17.194
+margin_top = 81.2808
+margin_right = 37.194
+margin_bottom = 101.281
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Towers/Basic Tower"]
+margin_left = 67.315
+margin_top = 81.2808
+margin_right = 87.315
+margin_bottom = 101.281
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Towers/Basic Tower"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 41.2106
+margin_top = 85.02
+margin_right = 49.2106
+margin_bottom = 99.02
+text = "3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Towers/Basic Tower"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 90.9603
+margin_top = 85.02
+margin_right = 98.9603
+margin_bottom = 99.02
+text = "3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Towers"]
+anchor_left = 0.05
+anchor_top = 1.0
+anchor_right = 0.05
+anchor_bottom = 1.0
+margin_top = -128.0
+margin_right = 128.0
+texture = ExtResource( 19 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Towers/Back"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 18.2664
+margin_top = 110.126
+margin_right = 114.266
+margin_bottom = 124.126
+text = "(0) Back"
+align = 1
+valign = 1
+
+[node name="InteractionLabel" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.8
+margin_left = -200.0
+margin_top = -50.0
+margin_right = 200.0
+margin_bottom = 50.0
+align = 1
+valign = 1
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerUpgradeMenu" type="Control" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.65
+anchor_right = 0.5
+anchor_bottom = 0.65
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 25 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -5,3 +5,4 @@ var resources = {
 	"stone": 0,
 	"gold": 0
 }
+
