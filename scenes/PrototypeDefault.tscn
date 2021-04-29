@@ -31,7 +31,7 @@
 [sub_resource type="CircleShape2D" id=2]
 radius = 19.3438
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=3]
 resource_name = "Idle"
 loop = true
 tracks/0/type = "value"
@@ -59,7 +59,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=4]
 resource_name = "Walk"
 length = 0.5
 loop = true
@@ -88,12 +88,12 @@ tracks/1/keys = {
 "values": [ 0.0, 7.0, -7.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=5]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 23.8362, 4.79984 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=7]
 
 [node name="Node2D" type="Node2D"]
 
@@ -155,8 +155,8 @@ texture = ExtResource( 18 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Entities/Player"]
 autoplay = "Idle"
-anims/Idle = SubResource( 6 )
-anims/Walk = SubResource( 7 )
+anims/Idle = SubResource( 3 )
+anims/Walk = SubResource( 4 )
 
 [node name="Tree" parent="Entities" instance=ExtResource( 24 )]
 position = Vector2( 152, -88 )
@@ -171,7 +171,7 @@ texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Tree2"]
 scale = Vector2( 0.8, 0.8 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Shadow" type="Sprite" parent="Entities/Tree2"]
 modulate = Color( 1, 1, 1, 0.313726 )
@@ -191,7 +191,7 @@ texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Tree3"]
 scale = Vector2( 0.8, 0.8 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Shadow" type="Sprite" parent="Entities/Tree3"]
 modulate = Color( 1, 1, 1, 0.313726 )
@@ -211,7 +211,7 @@ texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Tree4"]
 scale = Vector2( 0.8, 0.8 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Shadow" type="Sprite" parent="Entities/Tree4"]
 modulate = Color( 1, 1, 1, 0.313726 )
@@ -234,7 +234,7 @@ texture = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Stone2"]
 scale = Vector2( 0.8, 0.8 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Shadow" type="Sprite" parent="Entities/Stone2"]
 modulate = Color( 1, 1, 1, 0.313726 )
@@ -254,7 +254,7 @@ texture = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Stone3"]
 scale = Vector2( 0.8, 0.8 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Shadow" type="Sprite" parent="Entities/Stone3"]
 modulate = Color( 1, 1, 1, 0.313726 )
@@ -274,7 +274,7 @@ texture = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Stone4"]
 scale = Vector2( 0.8, 0.8 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Shadow" type="Sprite" parent="Entities/Stone4"]
 modulate = Color( 1, 1, 1, 0.313726 )
@@ -293,7 +293,7 @@ texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Home"]
 position = Vector2( 0, 10.4284 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="Interactable" type="Node2D" parent="Entities/Home"]
 
@@ -301,7 +301,7 @@ shape = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Home/EnemyHitArea"]
 position = Vector2( 0, 10.387 )
-shape = SubResource( 5 )
+shape = SubResource( 7 )
 
 [node name="HealthBarBackground" type="Sprite" parent="Entities/Home"]
 visible = false
@@ -337,7 +337,6 @@ tile_data = PoolIntArray( -1048604, 0, 0, -1048603, 0, 0, -1048602, 0, 0, -10486
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PrototypeResourcePanel" type="Control" parent="CanvasLayer"]
-visible = false
 self_modulate = Color( 1, 1, 1, 0.490196 )
 margin_right = 200.0
 margin_bottom = 200.0
