@@ -12,7 +12,7 @@ radius = 6.26951
 position = Vector2( 8, 127.097 )
 collision_mask = 2
 script = ExtResource( 2 )
-movement_speed = 2000
+movement_speed = 2250
 max_hp = 2
 
 [node name="Sprite" type="Sprite" parent="."]

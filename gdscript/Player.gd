@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var movement_speed = 50
+var movement_speed = 55
 var look_direction = 1
 
 onready var graphics_sprite = get_node("Sprite")

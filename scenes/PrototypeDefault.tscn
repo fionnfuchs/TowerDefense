@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
 [ext_resource path="res://gdscript/Resource.gd" type="Script" id=2]
@@ -25,6 +25,10 @@
 [ext_resource path="res://sprites/prototype/path_straight.png" type="Texture" id=23]
 [ext_resource path="res://scenes/Resources/Tree.tscn" type="PackedScene" id=24]
 [ext_resource path="res://gdscript/UI/TowerUpgradeMenu.gd" type="Script" id=25]
+[ext_resource path="res://tilesets/path.tres" type="TileSet" id=26]
+[ext_resource path="res://scenes/Path/TurnClockwise.tscn" type="PackedScene" id=27]
+[ext_resource path="res://sprites/prototype/tool_select_1.png" type="Texture" id=28]
+[ext_resource path="res://gdscript/UI/InteractionModeIndicator.gd" type="Script" id=29]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -317,15 +321,44 @@ z_index = 1
 texture = ExtResource( 18 )
 
 [node name="WaveSpawner" type="Node2D" parent="Entities"]
-position = Vector2( 8, 200 )
+position = Vector2( 8, 408 )
 script = ExtResource( 13 )
 
 [node name="Path8" type="Sprite" parent="Entities"]
+visible = false
 position = Vector2( 8, 240 )
 z_index = -4
 texture = ExtResource( 23 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 512 )
+
+[node name="Path" type="TileMap" parent="."]
+z_index = -4
+tile_set = ExtResource( 26 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -65536, 0, 2, 0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 458752, 0, 0, 589817, 0, 65537, 589818, 0, 1, 589819, 0, 1, 589820, 0, 1, 589821, 0, 1, 589822, 0, 1, 589823, 0, 1, 524288, 0, 131072, 655353, 0, 0, 720889, 0, 0, 786425, 0, 0, 851961, 0, 0, 917497, 0, 0, 983033, 0, 0, 1048569, 0, 65536, 1048570, 0, 1, 1048571, 0, 1, 1048572, 0, 1, 1048573, 0, 1, 1048574, 0, 1, 1048575, 0, 1, 983040, 0, 1, 983041, 0, 1, 983042, 0, 1, 983043, 0, 1, 983044, 0, 1, 983045, 0, 1, 983046, 0, 1, 983047, 0, 1, 983048, 0, 131073, 1048584, 0, 0, 1114120, 0, 0, 1179656, 0, 0, 1245192, 0, 0, 1310728, 0, 0, 1376264, 0, 0, 1441800, 0, 0, 1507328, 0, 65537, 1507329, 0, 1, 1507330, 0, 1, 1507331, 0, 1, 1507332, 0, 1, 1507333, 0, 1, 1507334, 0, 1, 1507335, 0, 1, 1507336, 0, 131072, 1572864, 0, 0, 1638400, 0, 0, 1703936, 0, 0, 1769472, 0, 0, 1835008, 0, 0, 1900544, 0, 0, 1966080, 0, 0, 2031616, 0, 0, 2097152, 0, 0, 2162688, 0, 0, 2228224, 0, 65538 )
+
+[node name="TurnClockwise" parent="Path" instance=ExtResource( 27 )]
+position = Vector2( 8.13779, 361.285 )
+
+[node name="TurnClockwise2" parent="Path" instance=ExtResource( 27 )]
+position = Vector2( -118.521, 248.285 )
+
+[node name="TurnClockwise3" parent="Path" instance=ExtResource( 27 )]
+position = Vector2( -103.721, 121.04 )
+
+[node name="TurnCounterClockwise3" parent="Path" instance=ExtResource( 27 )]
+position = Vector2( 136.518, 233.141 )
+turn_direction = -1
+
+[node name="TurnCounterClockwise5" parent="Path" instance=ExtResource( 27 )]
+position = Vector2( 22.5934, 134.705 )
+turn_direction = -1
+
+[node name="TurnCounterClockwise4" parent="Path" instance=ExtResource( 27 )]
+position = Vector2( 150.285, 374.256 )
+turn_direction = -1
 
 [node name="BackgroundGrid" type="TileMap" parent="."]
 z_index = -5
@@ -595,3 +628,29 @@ script = ExtResource( 25 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="InteractionModeIndicator" type="Control" parent="CanvasLayer"]
+anchor_top = 0.8
+anchor_right = 0.2
+anchor_bottom = 1.0
+script = ExtResource( 29 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Indicator" type="TextureRect" parent="CanvasLayer/InteractionModeIndicator"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+texture = ExtResource( 28 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 0, 512 )
