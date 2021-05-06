@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
 [ext_resource path="res://gdscript/Resource.gd" type="Script" id=2]
@@ -29,6 +29,8 @@
 [ext_resource path="res://scenes/Path/TurnClockwise.tscn" type="PackedScene" id=27]
 [ext_resource path="res://sprites/prototype/tool_select_1.png" type="Texture" id=28]
 [ext_resource path="res://gdscript/UI/InteractionModeIndicator.gd" type="Script" id=29]
+[ext_resource path="res://sprites/prototype/upgradepanel.png" type="Texture" id=30]
+[ext_resource path="res://sprites/prototype/supply_categorie_card.png" type="Texture" id=31]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -458,6 +460,9 @@ anchor_top = 0.7
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TopLabel" type="Label" parent="CanvasLayer/PrototypeBuildMenu"]
 self_modulate = Color( 0, 0, 0, 1 )
@@ -480,7 +485,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Categories"]
+[node name="Towers" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Categories"]
 anchor_left = 0.05
 anchor_top = 1.0
 anchor_right = 0.05
@@ -494,13 +499,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Categories/TextureRect"]
+[node name="Label" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Categories/Towers"]
 self_modulate = Color( 0, 0, 0, 1 )
 margin_left = 31.1269
 margin_top = 98.794
 margin_right = 96.1269
 margin_bottom = 112.794
 text = "(1) Towers"
+align = 1
+valign = 1
+
+[node name="Towers2" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Categories"]
+anchor_left = 0.05
+anchor_top = 1.0
+anchor_right = 0.05
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = -128.0
+margin_right = 256.0
+texture = ExtResource( 31 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Categories/Towers2"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 31.0
+margin_top = 98.794
+margin_right = 96.1269
+margin_bottom = 112.794
+text = "(2) Supply"
 align = 1
 valign = 1
 
@@ -523,7 +553,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Towers/Basic Tower"]
+[node name="Name" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Towers/Basic Tower"]
 self_modulate = Color( 0, 0, 0, 1 )
 margin_left = 18.2664
 margin_top = 110.126
@@ -551,7 +581,7 @@ texture = ExtResource( 9 )
 expand = true
 stretch_mode = 5
 
-[node name="Label2" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Towers/Basic Tower"]
+[node name="Wood" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Towers/Basic Tower"]
 self_modulate = Color( 0, 0, 0, 1 )
 margin_left = 41.2106
 margin_top = 85.02
@@ -564,7 +594,82 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Towers/Basic Tower"]
+[node name="Stone" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Towers/Basic Tower"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 90.9603
+margin_top = 85.02
+margin_right = 98.9603
+margin_bottom = 99.02
+text = "3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slowdown Tower" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Towers"]
+anchor_left = 0.05
+anchor_top = 1.0
+anchor_right = 0.05
+anchor_bottom = 1.0
+margin_left = 256.0
+margin_top = -128.0
+margin_right = 384.0
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Towers/Slowdown Tower"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 18.0
+margin_top = 110.126
+margin_right = 114.266
+margin_bottom = 124.126
+text = "(2) Slowdown"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Towers/Slowdown Tower"]
+margin_left = 17.194
+margin_top = 81.2808
+margin_right = 37.194
+margin_bottom = 101.281
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Towers/Slowdown Tower"]
+margin_left = 67.315
+margin_top = 81.2808
+margin_right = 87.315
+margin_bottom = 101.281
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+
+[node name="Wood" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Towers/Slowdown Tower"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 41.2106
+margin_top = 85.02
+margin_right = 49.2106
+margin_bottom = 99.02
+text = "3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stone" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Towers/Slowdown Tower"]
 self_modulate = Color( 0, 0, 0, 1 )
 margin_left = 90.9603
 margin_top = 85.02
@@ -601,6 +706,105 @@ text = "(0) Back"
 align = 1
 valign = 1
 
+[node name="Supply" type="Control" parent="CanvasLayer/PrototypeBuildMenu"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="House" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Supply"]
+anchor_left = 0.05
+anchor_top = 1.0
+anchor_right = 0.05
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = -128.0
+margin_right = 256.0
+texture = ExtResource( 31 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Supply/House"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 18.2664
+margin_top = 110.126
+margin_right = 114.266
+margin_bottom = 124.126
+text = "(1) House
+"
+align = 1
+valign = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Supply/House"]
+margin_left = 17.194
+margin_top = 81.2808
+margin_right = 37.194
+margin_bottom = 101.281
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Supply/House"]
+margin_left = 67.315
+margin_top = 81.2808
+margin_right = 87.315
+margin_bottom = 101.281
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Supply/House"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 41.2106
+margin_top = 85.02
+margin_right = 49.2106
+margin_bottom = 99.02
+text = "3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Supply/House"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 90.9603
+margin_top = 85.02
+margin_right = 98.9603
+margin_bottom = 99.02
+text = "3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Supply"]
+anchor_left = 0.05
+anchor_top = 1.0
+anchor_right = 0.05
+anchor_bottom = 1.0
+margin_top = -128.0
+margin_right = 128.0
+texture = ExtResource( 19 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/PrototypeBuildMenu/Supply/Back"]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 18.2664
+margin_top = 110.126
+margin_right = 114.266
+margin_bottom = 124.126
+text = "(0) Back"
+align = 1
+valign = 1
+
 [node name="InteractionLabel" type="Label" parent="CanvasLayer"]
 anchor_left = 0.5
 anchor_top = 0.8
@@ -618,16 +822,43 @@ __meta__ = {
 }
 
 [node name="TowerUpgradeMenu" type="Control" parent="CanvasLayer"]
-anchor_left = 0.5
-anchor_top = 0.65
-anchor_right = 0.5
-anchor_bottom = 0.65
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_left = 0.7
+anchor_top = 0.8
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 25 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/TowerUpgradeMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+texture = ExtResource( 30 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Upgrade Tower Label" type="Label" parent="CanvasLayer/TowerUpgradeMenu/TextureRect"]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.5
+anchor_top = 0.4
+anchor_right = 0.5
+anchor_bottom = 0.4
+margin_left = -30.0
+margin_top = -20.0
+margin_right = 70.0
+margin_bottom = 20.0
+text = "Upgrade Tower
+(u)"
+align = 1
+valign = 1
 
 [node name="InteractionModeIndicator" type="Control" parent="CanvasLayer"]
 anchor_top = 0.8

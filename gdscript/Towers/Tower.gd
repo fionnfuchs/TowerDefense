@@ -33,6 +33,8 @@ func update_grid():
 	var new_grid_vector = Grid.get_grid_position(position)
 	Grid.set_grid_value(grid_vector, 0)
 	Grid.set_grid_value(new_grid_vector, 1)
+	
+	grid_vector = new_grid_vector
 
 func body_entered_attention_area(body):
 	if body.has_node("ShootThis"):
@@ -49,6 +51,7 @@ func shoot():
 	bullet_instance.target = enemies_in_range[0]
 	bullet_instance.active = true
 	bullet_instance.damage = self.bullet_damage
+	bullet_instance.type = bullet_type
 
 func interact():
 	GameState.active_towers -= 1

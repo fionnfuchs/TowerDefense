@@ -8,14 +8,15 @@
 extents = Vector2( 8.24355, 5.66637 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 53.6428
+radius = 50.8324
 
-[node name="SimpleTower" type="StaticBody2D"]
+[node name="SlowdownTower" type="StaticBody2D"]
+modulate = Color( 0.623529, 0.894118, 1, 1 )
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 2 )
-shooting_time = 1.1
-bullet_damage = 2
+shooting_time = 2.2
+bullet_type = "SLOWDOWN"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2.45618 )

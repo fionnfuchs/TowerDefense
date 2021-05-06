@@ -9,6 +9,8 @@ onready var hp = max_hp
 
 onready var healthbar = get_node("HealthBar")
 
+var current_buff = "NONE"
+
 var move_direction = Vector2(0,-1)
 
 func _ready():
@@ -31,12 +33,18 @@ func _process(delta):
 	healthbar.position.x = (1 - float(hp) / max_hp) * -8
 
 func process_movement(delta):
-	move_and_slide(move_direction * movement_speed * delta)
+	if current_buff != "SLOWDOWN":
+		move_and_slide(move_direction * movement_speed * delta)
+	else:
+		move_and_slide(move_direction * movement_speed / 2 * delta)
 
 func get_hit(damage):
 	self.hp -= damage
 	if hp <= 0:
 		self.die()
+
+func set_buff(new_buff):
+	current_buff = new_buff
 
 func turn(direction):
 	move_direction = move_direction.rotated(direction * deg2rad(90))

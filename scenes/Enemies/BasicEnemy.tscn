@@ -12,7 +12,8 @@ radius = 6.26951
 position = Vector2( 8, 127.097 )
 collision_mask = 2
 script = ExtResource( 2 )
-movement_speed = 1500
+movement_speed = 1300
+max_hp = 5
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

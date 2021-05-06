@@ -5,6 +5,7 @@ export(int) var damage = 1
 
 var target = null
 var active = false
+var type = "NORMAL"
 
 func _ready():
 	pass # Replace with function body.
@@ -25,4 +26,6 @@ func hit_target():
 		target.get_hit(self.damage)
 	else:
 		print("WARNING: Target not hitable.")
+	if type == "SLOWDOWN" and target.has_method("set_buff"):
+		target.set_buff("SLOWDOWN")
 	queue_free()
