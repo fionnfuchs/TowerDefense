@@ -28,6 +28,7 @@ Signals="*res://gdscript/Singletons/Signals.gd"
 Entities="*res://gdscript/Singletons/Entities.gd"
 Difficulty="*res://gdscript/Singletons/Difficulty.gd"
 Debug="*res://gdscript/Singletons/Debug.gd"
+Prices="*res://gdscript/Singletons/Prices.gd"
 
 [input]
 

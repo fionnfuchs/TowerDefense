@@ -12,6 +12,9 @@ onready var house_stone_label = get_node("Supply/House/Label3")
 
 var menu_state = "categories"
 
+
+# TODO: REFACTOR THIS MESS AFTER THE MVP
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -39,15 +42,15 @@ func update_menu_state():
 		towers_node.visible = true
 		
 		
-		basic_tower_node.get_node("Wood").text = str(3 + GameState.active_towers * 2)
-		basic_tower_node.get_node("Stone").text = str(3 + GameState.active_towers * 2)
+		basic_tower_node.get_node("Wood").text = str(Prices.simple_tower.wood + GameState.active_towers * Prices.simple_tower.wood_increment)
+		basic_tower_node.get_node("Stone").text = str(Prices.simple_tower.stone + GameState.active_towers * Prices.simple_tower.stone_increment)
 		
-		slowdown_tower_node.get_node("Wood").text = str(3 + GameState.active_towers * 2)
-		slowdown_tower_node.get_node("Stone").text = str(3 + GameState.active_towers * 2)
+		slowdown_tower_node.get_node("Wood").text = str(Prices.slowdown_tower.wood + GameState.active_towers * Prices.simple_tower.wood_increment)
+		slowdown_tower_node.get_node("Stone").text = str(Prices.slowdown_tower.stone + GameState.active_towers * Prices.simple_tower.stone_increment)
 		
 	elif menu_state == "supply":
-		house_wood_label.text = str(3 + GameState.active_towers)
-		house_stone_label.text = str(3 + GameState.active_towers)
+		house_wood_label.text = str(Prices.house.wood + GameState.active_houses * Prices.house.wood_increment)
+		house_stone_label.text = str(Prices.house.stone + GameState.active_houses * Prices.house.stone_increment)
 		supply_node.visible = true
 		
 func check_keyboard_input():
@@ -58,25 +61,25 @@ func check_keyboard_input():
 			menu_state = "supply"
 	elif menu_state == "towers":
 		if Input.is_action_just_pressed("1"):
-			if Resources.resources["wood"] >= (3 + GameState.active_towers * 2) and Resources.resources["stone"] >= (3 + GameState.active_towers * 2):
+			if Resources.resources["wood"] >= (Prices.simple_tower.wood + GameState.active_towers * Prices.simple_tower.wood_increment) and Resources.resources["stone"] >= (Prices.simple_tower.stone + GameState.active_towers * Prices.simple_tower.stone_increment):
 				# CHECK SIGNAL BEFORE
-				Resources.resources["wood"] -= (3 + GameState.active_towers * 2)
-				Resources.resources["stone"] -= (3 + GameState.active_towers * 2)
+				Resources.resources["wood"] -= (Prices.simple_tower.wood + GameState.active_towers * Prices.simple_tower.wood_increment)
+				Resources.resources["stone"] -= (Prices.simple_tower.stone + GameState.active_towers * Prices.simple_tower.stone_increment)
 				Signals.emit_signal("trigger_build", Scenes.simple_tower)
 		if Input.is_action_just_pressed("2"):
-			if Resources.resources["wood"] >= (3 + GameState.active_towers * 2) and Resources.resources["stone"] >= (3 + GameState.active_towers * 2):
+			if Resources.resources["wood"] >= (Prices.slowdown_tower.wood + GameState.active_towers * Prices.simple_tower.wood_increment) and Resources.resources["stone"] >= (Prices.slowdown_tower.stone + GameState.active_towers * Prices.simple_tower.stone_increment):
 				# CHECK SIGNAL BEFORE
-				Resources.resources["wood"] -= (3 + GameState.active_towers * 2)
-				Resources.resources["stone"] -= (3 + GameState.active_towers * 2)
+				Resources.resources["wood"] -= (Prices.slowdown_tower.wood + GameState.active_towers * Prices.simple_tower.wood_increment)
+				Resources.resources["stone"] -= (Prices.slowdown_tower.stone + GameState.active_towers * Prices.simple_tower.stone_increment)
 				Signals.emit_signal("trigger_build", Scenes.slowdown_tower)
 		elif Input.is_action_just_pressed("0"):
 			menu_state = "categories"
 	elif menu_state == "supply":
 		if Input.is_action_just_pressed("1"):
-			if Resources.resources["wood"] >= (3 + GameState.active_houses) and Resources.resources["stone"] >= (3 + GameState.active_houses):
+			if Resources.resources["wood"] >= (Prices.house.wood + GameState.active_houses * Prices.house.wood_increment) and Resources.resources["stone"] >= (Prices.house.stone + GameState.active_houses * Prices.house.stone_increment):
 				# CHECK SIGNAL BEFORE
-				Resources.resources["wood"] -= (3 + GameState.active_houses)
-				Resources.resources["stone"] -= (3 + GameState.active_houses)
+				Resources.resources["wood"] -= (Prices.house.wood + GameState.active_houses * Prices.house.wood_increment)
+				Resources.resources["stone"] -= (Prices.house.stone + GameState.active_houses * Prices.house.stone_increment)
 				Signals.emit_signal("trigger_build", Scenes.building_house)
 		elif Input.is_action_just_pressed("0"):
 			menu_state = "categories"
