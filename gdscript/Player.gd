@@ -144,6 +144,7 @@ func build(building):
 		parent.add_child(building_instance)
 		building_instance.global_position = Grid.grid_to_world_position(grid_vector)
 		building_instance.update_grid()
+		building_instance.play_build_sound()
 	else:
 		print("Place already taken...")
 	

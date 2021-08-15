@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://sprites/prototype/prototype_enemy.png" type="Texture" id=1]
 [ext_resource path="res://gdscript/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://sprites/prototype/pixel.png" type="Texture" id=3]
 [ext_resource path="res://sprites/prototype/shadow_simple.png" type="Texture" id=4]
+[ext_resource path="res://sounds/448080__breviceps__wet-click.wav" type="AudioStream" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.26951
@@ -46,3 +47,6 @@ texture = ExtResource( 4 )
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )

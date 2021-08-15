@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://sprites/prototype/tower_placeholder.png" type="Texture" id=1]
 [ext_resource path="res://gdscript/Towers/Tower.gd" type="Script" id=2]
 [ext_resource path="res://sprites/prototype/shadow_simple.png" type="Texture" id=3]
+[ext_resource path="res://sounds/399934__old-waveplay__perc-short-click-snap-perc.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.24355, 5.66637 )
@@ -39,3 +40,8 @@ modulate = Color( 1, 1, 1, 0.313726 )
 position = Vector2( 0, 1.55104 )
 z_index = -2
 texture = ExtResource( 3 )
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="BuildSound" type="AudioStreamPlayer2D" parent="."]

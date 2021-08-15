@@ -3,12 +3,14 @@ extends StaticBody2D
 export(String) var resource_name = "Resource"
 
 onready var sprite = get_node("Sprite")
+onready var gather_sound = get_node("GatherSound")
 
 var grid_position = Vector2()
 var max_amount = 1
 var current_amount = 1
 
 func _ready():
+	print(gather_sound)
 	position_changed()
 	
 	Signals.connect("wave_beaten", self, "restock")
@@ -27,6 +29,7 @@ func position_changed():
 
 func interact():
 	if current_amount > 0:
+		gather_sound.play()
 		Resources.resources[resource_name] += 1
 		current_amount -= 1
 

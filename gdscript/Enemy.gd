@@ -10,6 +10,7 @@ onready var hp = max_hp
 onready var healthbar = get_node("HealthBar")
 onready var navigation_2d = get_node("../../PathNavigation2D")
 onready var line2d = get_node("Line2D")
+onready var hitsound = get_node("HitSound")
 
 var current_buff = "NONE"
 var target = Vector2(8,-32)
@@ -66,6 +67,7 @@ func process_movement(delta):
 			move_and_slide(direction * movement_speed * delta / 2)
 
 func get_hit(damage):
+	hitsound.play()
 	self.hp -= damage
 	if hp <= 0:
 		self.die()

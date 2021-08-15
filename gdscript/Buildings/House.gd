@@ -6,6 +6,7 @@ extends StaticBody2D
 # var b = "text"
 
 var grid_vector = Vector2()
+onready var build_sound = get_node("BuildSound")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,3 +20,6 @@ func update_grid():
 	Grid.set_grid_value(grid_vector, 0)
 	Grid.set_grid_value(new_grid_vector, 1)
 	grid_vector = new_grid_vector
+
+func play_build_sound():
+	build_sound.play()

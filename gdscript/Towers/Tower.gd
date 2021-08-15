@@ -2,6 +2,8 @@ extends StaticBody2D
 
 onready var attention_area = get_node("Area2D")
 onready var parent = get_parent()
+onready var shoot_sound = get_node("ShootSound")
+onready var build_sound = get_node("BuildSound")
 
 var enemies_in_range = []
 
@@ -47,6 +49,7 @@ func body_exited_attention_area(body):
 		enemies_in_range.erase(body)
 	
 func shoot():
+	shoot_sound.play()
 	var bullet_instance = Scenes.basic_bullet.instance()
 	parent.add_child(bullet_instance)
 	bullet_instance.position = self.position
@@ -61,6 +64,9 @@ func shoot():
 func interact():
 	GameState.active_towers -= 1
 	queue_free()
+
+func play_build_sound():
+	build_sound.play()
 	
 func upgrade_tower():
 	pass
