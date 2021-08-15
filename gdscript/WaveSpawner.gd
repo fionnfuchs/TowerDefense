@@ -13,30 +13,36 @@ func spawn_wave():
 			var enemy_instance = Scenes.simple_enemy.instance()
 			parent.add_child(enemy_instance)
 			enemy_instance.position = Vector2(position.x, position.y + i * 32)
+			enemy_instance.update_navigation()
 		elif Difficulty.current_wave < 5:
 			var r = rand_range(1,10)
 			if r < 8:
 				var enemy_instance = Scenes.simple_enemy.instance()
 				parent.add_child(enemy_instance)
 				enemy_instance.position = Vector2(position.x, position.y + i * 32)
+				enemy_instance.update_navigation()
 			else:
 				var enemy_instance = Scenes.fast_enemy.instance()
 				parent.add_child(enemy_instance)
 				enemy_instance.position = Vector2(position.x, position.y + i * 32)
+				enemy_instance.update_navigation()
 		else:
 			var r = rand_range(1,10)
 			if r < 6:
 				var enemy_instance = Scenes.simple_enemy.instance()
 				parent.add_child(enemy_instance)
 				enemy_instance.position = Vector2(position.x, position.y + i * 32)
+				enemy_instance.update_navigation()
 			elif r < 9:
 				var enemy_instance = Scenes.fast_enemy.instance()
 				parent.add_child(enemy_instance)
 				enemy_instance.position = Vector2(position.x, position.y + i * 32)
+				enemy_instance.update_navigation()
 			else:
 				var enemy_instance = Scenes.tank_enemy.instance()
 				parent.add_child(enemy_instance)
 				enemy_instance.position = Vector2(position.x, position.y + i * 32)
+				enemy_instance.update_navigation()
 	Difficulty.current_wave += 1
 
 func check_state_condition():

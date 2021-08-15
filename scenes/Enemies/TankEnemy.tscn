@@ -42,3 +42,6 @@ position = Vector2( 0, 3.77458 )
 scale = Vector2( 0.8, 0.8 )
 z_index = -2
 texture = ExtResource( 4 )
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false

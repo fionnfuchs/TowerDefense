@@ -7,9 +7,11 @@ var enemies_in_range = []
 
 var shoot_timer = 0
 
+
 export(float) var shooting_time = 2
 
 export(String) var bullet_type = "NORMAL"
+export(String) var target_choice = "FOCUS"
 export(int) var bullet_damage = 1
 
 var grid_vector = Vector2()
@@ -48,7 +50,10 @@ func shoot():
 	var bullet_instance = Scenes.basic_bullet.instance()
 	parent.add_child(bullet_instance)
 	bullet_instance.position = self.position
-	bullet_instance.target = enemies_in_range[0]
+	if target_choice == "FOCUS":
+		bullet_instance.target = enemies_in_range[0]
+	elif target_choice == "RANDOM":
+		bullet_instance.target = enemies_in_range[int(rand_range(0,len(enemies_in_range)-1))]
 	bullet_instance.active = true
 	bullet_instance.damage = self.bullet_damage
 	bullet_instance.type = bullet_type
