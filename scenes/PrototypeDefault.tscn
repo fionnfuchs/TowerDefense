@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/prototype/portal_shadow.png" type="Texture" id=2]
@@ -29,7 +29,9 @@
 [ext_resource path="res://scenes/DruidMenu.gd" type="Script" id=27]
 [ext_resource path="res://sprites/prototype/tool_select_1.png" type="Texture" id=28]
 [ext_resource path="res://gdscript/UI/InteractionModeIndicator.gd" type="Script" id=29]
+[ext_resource path="res://gdscript/Audio/GlobalSounds.gd" type="Script" id=30]
 [ext_resource path="res://sprites/prototype/supply_categorie_card.png" type="Texture" id=31]
+[ext_resource path="res://sounds/240781__f4ngy__coins-jingling.wav" type="AudioStream" id=32]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -885,3 +887,9 @@ tile_set = ExtResource( 26 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( -65536, 0, 2, 0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 458752, 0, 0, 589818, 0, 65537, 589819, 0, 1, 589820, 0, 1, 589821, 0, 1, 589822, 0, 1, 589823, 0, 1, 524288, 0, 131072, 655354, 0, 0, 720890, 0, 0, 786426, 0, 0, 851962, 0, 0, 917498, 0, 65536, 917499, 0, 1, 917500, 0, 1, 917501, 0, 1, 917502, 0, 1, 917503, 0, 1, 851968, 0, 1, 851969, 0, 1, 851970, 0, 1, 851971, 0, 1, 851972, 0, 1, 851973, 0, 131073, 917509, 0, 0, 983045, 0, 0, 1048581, 0, 0, 1114117, 0, 0, 1179653, 0, 0, 1245189, 0, 65538 )
+
+[node name="GlobalSounds" type="Node2D" parent="."]
+script = ExtResource( 30 )
+
+[node name="CollectCoin" type="AudioStreamPlayer2D" parent="GlobalSounds"]
+stream = ExtResource( 32 )
