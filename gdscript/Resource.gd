@@ -30,7 +30,7 @@ func position_changed():
 func interact():
 	if current_amount > 0:
 		gather_sound.play()
-		Resources.resources[resource_name] += 1
+		Resources.resources[resource_name] += 1 * GlobalEffects.get_total_resource_gathering_multiplier()
 		current_amount -= 1
 
 func get_info_text():

@@ -19,6 +19,8 @@ var path = null
 
 func _ready():
 	Entities.enemies.append(self)
+	self.max_hp = max_hp * GlobalEffects.get_total_enemy_health_multiplier()
+	self.hp = self.max_hp
 	
 func update_navigation():
 	if navigation_2d != null:
@@ -54,17 +56,17 @@ func process_movement(delta):
 		var direction = path[0] - position
 		direction = direction.normalized()
 		if not "SLOWDOWN" in buffs:
-			move_and_slide(direction * movement_speed * delta)
+			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta)
 		else:
-			move_and_slide(direction * movement_speed * delta / 2)
+			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta / 2)
 	
 	if !path or len(path) == 0:
 		print("Enemy left path")
 		var direction = target - position
 		if not "SLOWDOWN" in buffs:
-			move_and_slide(direction * movement_speed * delta)
+			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta)
 		else:
-			move_and_slide(direction * movement_speed * delta / 2)
+			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta / 2)
 
 func get_hit(damage):
 	hitsound.play()

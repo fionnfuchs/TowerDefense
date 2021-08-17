@@ -23,7 +23,7 @@ func _process(delta):
 
 func hit_target():
 	if target.has_method("get_hit"):
-		target.get_hit(self.damage)
+		target.get_hit(self.damage * GlobalEffects.get_total_tower_damage_multiplier())
 	else:
 		print("WARNING: Target not hitable.")
 	if type == "SLOWDOWN" and target.has_method("set_buff"):

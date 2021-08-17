@@ -11,6 +11,7 @@ func position_changed():
 	Grid.set_grid_value_by_world_position(self.position, 2)
 
 func interact():
+	GameState.set_game_state(2)
 	pass
 
 func get_info_text():

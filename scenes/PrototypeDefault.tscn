@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/prototype/portal_shadow.png" type="Texture" id=2]
@@ -24,12 +24,11 @@
 [ext_resource path="res://scenes/Resources/Stone.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sprites/prototype/path_straight.png" type="Texture" id=23]
 [ext_resource path="res://scenes/Resources/Tree.tscn" type="PackedScene" id=24]
-[ext_resource path="res://sprites/prototype/exclamation_symbol.png" type="Texture" id=25]
+[ext_resource path="res://scenes/Druid.tscn" type="PackedScene" id=25]
 [ext_resource path="res://tilesets/path.tres" type="TileSet" id=26]
-[ext_resource path="res://gdscript/Druid.gd" type="Script" id=27]
+[ext_resource path="res://scenes/DruidMenu.gd" type="Script" id=27]
 [ext_resource path="res://sprites/prototype/tool_select_1.png" type="Texture" id=28]
 [ext_resource path="res://gdscript/UI/InteractionModeIndicator.gd" type="Script" id=29]
-[ext_resource path="res://sprites/prototype/druids.png" type="Texture" id=30]
 [ext_resource path="res://sprites/prototype/supply_categorie_card.png" type="Texture" id=31]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -98,9 +97,6 @@ tracks/1/keys = {
 extents = Vector2( 23.8362, 4.79984 )
 
 [sub_resource type="RectangleShape2D" id=7]
-
-[sub_resource type="CircleShape2D" id=8]
-radius = 7.32586
 
 [node name="Node2D" type="Node2D"]
 
@@ -234,7 +230,7 @@ z_index = 1
 texture = ExtResource( 18 )
 
 [node name="WaveSpawner" type="Node2D" parent="Entities"]
-position = Vector2( 8, 512.78 )
+position = Vector2( 88, 312 )
 script = ExtResource( 13 )
 
 [node name="Path8" type="Sprite" parent="Entities"]
@@ -245,29 +241,7 @@ texture = ExtResource( 23 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 512 )
 
-[node name="Druid" type="StaticBody2D" parent="Entities"]
-position = Vector2( -88, 40 )
-script = ExtResource( 27 )
-
-[node name="Sprite" type="Sprite" parent="Entities/Druid"]
-texture = ExtResource( 30 )
-hframes = 3
-region_rect = Rect2( 0, 0, 16, 16 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Druid"]
-shape = SubResource( 8 )
-
-[node name="Interactable" type="Node2D" parent="Entities/Druid"]
-
-[node name="ExclamationSymbol" type="Sprite" parent="Entities/Druid"]
-position = Vector2( 0, -15.457 )
-texture = ExtResource( 25 )
-
-[node name="Shadow" type="Sprite" parent="Entities/Druid"]
-modulate = Color( 1, 1, 1, 0.313726 )
-position = Vector2( 0, 2.23323 )
-z_index = -1
-texture = ExtResource( 6 )
+[node name="Druid" parent="Entities" instance=ExtResource( 25 )]
 
 [node name="BackgroundGrid" type="TileMap" parent="."]
 z_index = -5
@@ -341,11 +315,10 @@ __meta__ = {
 }
 
 [node name="DifficultyPanel" type="Panel" parent="CanvasLayer"]
-self_modulate = Color( 1, 1, 1, 0.490196 )
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -200.0
-margin_bottom = 200.0
+margin_bottom = 50.0
 script = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -442,8 +415,12 @@ align = 1
 valign = 1
 
 [node name="Towers" type="Control" parent="CanvasLayer/PrototypeBuildMenu"]
+anchor_top = -0.0122269
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.987773
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Basic Tower" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/Towers"]
 anchor_left = 0.05
@@ -751,6 +728,154 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="DruidMenu" type="Panel" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -300.0
+margin_top = -200.0
+margin_right = 300.0
+margin_bottom = -50.0
+script = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="CanvasLayer/DruidMenu"]
+margin_left = 16.6152
+margin_top = 15.3205
+margin_right = 92.6152
+margin_bottom = 29.3205
+text = "Hello there!
+I can offer to perform one of two spells in exchange for 25 gold: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spell1" type="Panel" parent="CanvasLayer/DruidMenu"]
+self_modulate = Color( 0.721569, 0.721569, 0.721569, 1 )
+margin_left = 37.0
+margin_top = 53.8651
+margin_right = 257.0
+margin_bottom = 133.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PositiveEffect" type="Label" parent="CanvasLayer/DruidMenu/Spell1"]
+margin_right = 220.0
+margin_bottom = 14.0
+text = "Towers shoot 20% faster"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NegativeEffect" type="Label" parent="CanvasLayer/DruidMenu/Spell1"]
+margin_top = 48.1193
+margin_right = 220.0
+margin_bottom = 79.1193
+text = "Enemies get 15% harder to kill"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="But" type="Label" parent="CanvasLayer/DruidMenu/Spell1"]
+self_modulate = Color( 0.756863, 0, 0, 1 )
+margin_top = 28.9148
+margin_right = 220.0
+margin_bottom = 49.2368
+text = "but"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CastButton" type="Button" parent="CanvasLayer/DruidMenu/Spell1"]
+margin_left = 36.0
+margin_top = 79.9812
+margin_right = 176.0
+margin_bottom = 99.9812
+text = "Cast this spell"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spell2" type="Panel" parent="CanvasLayer/DruidMenu"]
+self_modulate = Color( 0.721569, 0.721569, 0.721569, 1 )
+margin_left = 345.68
+margin_top = 53.8651
+margin_right = 565.68
+margin_bottom = 133.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PositiveEffect" type="Label" parent="CanvasLayer/DruidMenu/Spell2"]
+margin_right = 220.0
+margin_bottom = 14.0
+text = "Towers deal 25% more damage"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NegativeEffect" type="Label" parent="CanvasLayer/DruidMenu/Spell2"]
+margin_top = 48.1193
+margin_right = 220.0
+margin_bottom = 79.1193
+text = "Enemies get 20% faster"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="But" type="Label" parent="CanvasLayer/DruidMenu/Spell2"]
+self_modulate = Color( 0.756863, 0, 0, 1 )
+margin_top = 28.9148
+margin_right = 220.0
+margin_bottom = 49.2368
+text = "but"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CastButton" type="Button" parent="CanvasLayer/DruidMenu/Spell2"]
+margin_left = 36.0
+margin_top = 79.3041
+margin_right = 176.0
+margin_bottom = 99.3041
+text = "Cast this spell"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CancelButton" type="Button" parent="CanvasLayer/DruidMenu"]
+self_modulate = Color( 1, 0.541176, 0.541176, 1 )
+margin_left = 253.026
+margin_top = 126.628
+margin_right = 353.026
+margin_bottom = 146.628
+text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="PathNavigation2D" type="Navigation2D" parent="."]
 
 [node name="PathTiles" type="TileMap" parent="PathNavigation2D"]
@@ -759,4 +884,4 @@ z_index = -4
 tile_set = ExtResource( 26 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( -65536, 0, 2, 0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 458752, 0, 0, 589817, 0, 65537, 589818, 0, 1, 589819, 0, 1, 589820, 0, 1, 589821, 0, 1, 589822, 0, 1, 589823, 0, 1, 524288, 0, 131072, 655353, 0, 0, 720889, 0, 0, 786425, 0, 0, 851961, 0, 0, 917497, 0, 0, 983033, 0, 0, 1048569, 0, 65536, 1048570, 0, 1, 1048571, 0, 1, 1048572, 0, 1, 1048573, 0, 1, 1048574, 0, 1, 1048575, 0, 1, 983040, 0, 1, 983041, 0, 1, 983042, 0, 1, 983043, 0, 1, 983044, 0, 1, 983045, 0, 1, 983046, 0, 1, 983047, 0, 1, 983048, 0, 131073, 1048584, 0, 0, 1114120, 0, 0, 1179656, 0, 0, 1245192, 0, 0, 1310728, 0, 0, 1376264, 0, 0, 1441800, 0, 0, 1507328, 0, 65537, 1507329, 0, 1, 1507330, 0, 1, 1507331, 0, 1, 1507332, 0, 1, 1507333, 0, 1, 1507334, 0, 1, 1507335, 0, 1, 1507336, 0, 131072, 1572864, 0, 0, 1638400, 0, 0, 1703936, 0, 0, 1769472, 0, 0, 1835008, 0, 0, 1900544, 0, 0, 1966080, 0, 0, 2031616, 0, 0, 2097152, 0, 0, 2162688, 0, 0, 2228224, 0, 65538 )
+tile_data = PoolIntArray( -65536, 0, 2, 0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 458752, 0, 0, 589818, 0, 65537, 589819, 0, 1, 589820, 0, 1, 589821, 0, 1, 589822, 0, 1, 589823, 0, 1, 524288, 0, 131072, 655354, 0, 0, 720890, 0, 0, 786426, 0, 0, 851962, 0, 0, 917498, 0, 65536, 917499, 0, 1, 917500, 0, 1, 917501, 0, 1, 917502, 0, 1, 917503, 0, 1, 851968, 0, 1, 851969, 0, 1, 851970, 0, 1, 851971, 0, 1, 851972, 0, 1, 851973, 0, 131073, 917509, 0, 0, 983045, 0, 0, 1048581, 0, 0, 1114117, 0, 0, 1179653, 0, 0, 1245189, 0, 65538 )

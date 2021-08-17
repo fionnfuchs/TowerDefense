@@ -28,18 +28,20 @@ func _ready():
 	Entities.player = self
 
 func _process(delta):
-	process_movement(delta)
-	if GameState.game_state == 0:
-		process_input(delta)
-		process_interactables()
-		process_cursor()
-		self.visible = true
-		collision_shape.disabled = false
-		
-		Difficulty.raise_difficulty(delta)
-	else:
-		self.visible = false
-		collision_shape.disabled = true
+	process_interaction(delta)
+	if GameState.game_state != 2:
+		process_movement(delta)
+		if GameState.game_state == 0:
+			process_input(delta)
+			process_interactables()
+			process_cursor()
+			self.visible = true
+			collision_shape.disabled = false
+			
+			Difficulty.raise_difficulty(delta)
+		else:
+			self.visible = false
+			collision_shape.disabled = true
 	
 
 func process_movement(delta):
@@ -73,7 +75,8 @@ func process_input(delta):
 			GameState.set_interaction_mode(0)
 		else:
 			GameState.set_interaction_mode(1)
-			
+
+func process_interaction(delta):
 	if GameState.interaction_mode == 0 and interaction_target != null:
 		if Input.is_action_pressed("interact") and !interaction_locked:
 			interaction_charge_background.visible = true
