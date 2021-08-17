@@ -29,8 +29,7 @@ tracks/0/keys = {
 position = Vector2( 8, 127.097 )
 collision_mask = 2
 script = ExtResource( 2 )
-movement_speed = 2250
-max_hp = 5
+movement_speed = 2500
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -0.143321, 7.92982 )
@@ -70,4 +69,5 @@ visible = false
 stream = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Walk"
 anims/Walk = SubResource( 2 )

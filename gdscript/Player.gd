@@ -17,7 +17,7 @@ onready var interaction_charge_bar = get_node("InteractionChargeBar")
 var interaction_target = null
 var interactables = []
 var interaction_charge = 0
-var interaction_charge_needed = 0.5
+var interaction_charge_needed = 0.3
 var interaction_locked = false
 
 func _ready():

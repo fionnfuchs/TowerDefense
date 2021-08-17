@@ -12,7 +12,7 @@ onready var navigation_2d = get_node("../../PathNavigation2D")
 onready var line2d = get_node("Line2D")
 onready var hitsound = get_node("HitSound")
 
-var current_buff = "NONE"
+var buffs = []
 var target = Vector2(8,-32)
 
 var path = null
@@ -53,7 +53,7 @@ func process_movement(delta):
 	if path and len(path) > 0:
 		var direction = path[0] - position
 		direction = direction.normalized()
-		if current_buff != "SLOWDOWN":
+		if not "SLOWDOWN" in buffs:
 			move_and_slide(direction * movement_speed * delta)
 		else:
 			move_and_slide(direction * movement_speed * delta / 2)
@@ -61,7 +61,7 @@ func process_movement(delta):
 	if !path or len(path) == 0:
 		print("Enemy left path")
 		var direction = target - position
-		if current_buff != "SLOWDOWN":
+		if not "SLOWDOWN" in buffs:
 			move_and_slide(direction * movement_speed * delta)
 		else:
 			move_and_slide(direction * movement_speed * delta / 2)
@@ -73,4 +73,9 @@ func get_hit(damage):
 		self.die()
 
 func set_buff(new_buff):
-	current_buff = new_buff
+	if not new_buff in buffs:
+		buffs.append(new_buff)
+
+func remove_buff(buff):
+	if buff in buffs:
+		buffs.erase(buff)

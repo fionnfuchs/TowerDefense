@@ -1,9 +1,11 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
+[ext_resource path="res://sprites/prototype/portal_shadow.png" type="Texture" id=2]
 [ext_resource path="res://sprites/prototype/prototype_entities.png" type="Texture" id=3]
 [ext_resource path="res://sprites/prototype/portal.png" type="Texture" id=4]
 [ext_resource path="res://sprites/prototype/Tree.png" type="Texture" id=5]
+[ext_resource path="res://sprites/prototype/shadow_simple.png" type="Texture" id=6]
 [ext_resource path="res://tilesets/grid.tres" type="TileSet" id=7]
 [ext_resource path="res://sprites/prototype/cursor.png" type="Texture" id=8]
 [ext_resource path="res://sprites/prototype/stone.png" type="Texture" id=9]
@@ -22,11 +24,12 @@
 [ext_resource path="res://scenes/Resources/Stone.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sprites/prototype/path_straight.png" type="Texture" id=23]
 [ext_resource path="res://scenes/Resources/Tree.tscn" type="PackedScene" id=24]
-[ext_resource path="res://gdscript/UI/TowerUpgradeMenu.gd" type="Script" id=25]
+[ext_resource path="res://sprites/prototype/exclamation_symbol.png" type="Texture" id=25]
 [ext_resource path="res://tilesets/path.tres" type="TileSet" id=26]
+[ext_resource path="res://gdscript/Druid.gd" type="Script" id=27]
 [ext_resource path="res://sprites/prototype/tool_select_1.png" type="Texture" id=28]
 [ext_resource path="res://gdscript/UI/InteractionModeIndicator.gd" type="Script" id=29]
-[ext_resource path="res://sprites/prototype/upgradepanel.png" type="Texture" id=30]
+[ext_resource path="res://sprites/prototype/druids.png" type="Texture" id=30]
 [ext_resource path="res://sprites/prototype/supply_categorie_card.png" type="Texture" id=31]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -96,6 +99,9 @@ extents = Vector2( 23.8362, 4.79984 )
 
 [sub_resource type="RectangleShape2D" id=7]
 
+[sub_resource type="CircleShape2D" id=8]
+radius = 7.32586
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Entities" type="YSort" parent="."]
@@ -159,6 +165,13 @@ autoplay = "Idle"
 anims/Idle = SubResource( 3 )
 anims/Walk = SubResource( 4 )
 
+[node name="Shadow" type="Sprite" parent="Entities/Player"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 0, 4.06094 )
+scale = Vector2( 0.75, 0.75 )
+z_index = -1
+texture = ExtResource( 6 )
+
 [node name="Tree" parent="Entities" instance=ExtResource( 24 )]
 position = Vector2( 152, -88 )
 
@@ -188,6 +201,12 @@ script = ExtResource( 15 )
 
 [node name="Sprite" type="Sprite" parent="Entities/Home"]
 texture = ExtResource( 4 )
+
+[node name="Shadow" type="Sprite" parent="Entities/Home"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 0, 14.8867 )
+z_index = -2
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Home"]
 position = Vector2( 0, 10.4284 )
@@ -225,6 +244,30 @@ z_index = -4
 texture = ExtResource( 23 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 512 )
+
+[node name="Druid" type="StaticBody2D" parent="Entities"]
+position = Vector2( -88, 40 )
+script = ExtResource( 27 )
+
+[node name="Sprite" type="Sprite" parent="Entities/Druid"]
+texture = ExtResource( 30 )
+hframes = 3
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Druid"]
+shape = SubResource( 8 )
+
+[node name="Interactable" type="Node2D" parent="Entities/Druid"]
+
+[node name="ExclamationSymbol" type="Sprite" parent="Entities/Druid"]
+position = Vector2( 0, -15.457 )
+texture = ExtResource( 25 )
+
+[node name="Shadow" type="Sprite" parent="Entities/Druid"]
+modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 0, 2.23323 )
+z_index = -1
+texture = ExtResource( 6 )
 
 [node name="BackgroundGrid" type="TileMap" parent="."]
 z_index = -5
@@ -684,45 +727,6 @@ script = ExtResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="TowerUpgradeMenu" type="Control" parent="CanvasLayer"]
-anchor_left = 0.7
-anchor_top = 0.8
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 25 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/TowerUpgradeMenu"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 10.0
-margin_top = 10.0
-margin_right = -10.0
-margin_bottom = -10.0
-texture = ExtResource( 30 )
-expand = true
-stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Upgrade Tower Label" type="Label" parent="CanvasLayer/TowerUpgradeMenu/TextureRect"]
-self_modulate = Color( 0, 0, 0, 1 )
-anchor_left = 0.5
-anchor_top = 0.4
-anchor_right = 0.5
-anchor_bottom = 0.4
-margin_left = -30.0
-margin_top = -20.0
-margin_right = 70.0
-margin_bottom = 20.0
-text = "Upgrade Tower
-(u)"
-align = 1
-valign = 1
 
 [node name="InteractionModeIndicator" type="Control" parent="CanvasLayer"]
 anchor_top = 0.8

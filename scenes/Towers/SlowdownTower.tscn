@@ -16,7 +16,7 @@ modulate = Color( 0.623529, 0.894118, 1, 1 )
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 2 )
-shooting_time = 2.2
+shooting_time = 1.5
 bullet_type = "SLOWDOWN"
 target_choice = "RANDOM"
 
