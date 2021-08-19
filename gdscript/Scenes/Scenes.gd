@@ -1,7 +1,6 @@
 extends Node
 
 var simple_tower = preload("res://scenes/Towers/SimpleTower.tscn")
-var slowdown_tower = preload("res://scenes/Towers/SlowdownTower.tscn")
 
 var simple_enemy = preload("res://scenes/Enemies/BasicEnemy.tscn")
 var fast_enemy = preload("res://scenes/Enemies/FastEnemy.tscn")

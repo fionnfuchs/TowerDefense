@@ -10,7 +10,6 @@ var max_amount = 1
 var current_amount = 1
 
 func _ready():
-	print(gather_sound)
 	position_changed()
 	
 	Signals.connect("wave_beaten", self, "restock")

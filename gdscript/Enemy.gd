@@ -81,3 +81,8 @@ func set_buff(new_buff):
 func remove_buff(buff):
 	if buff in buffs:
 		buffs.erase(buff)
+
+func has_buff(buff):
+	if buff in buffs:
+		return true
+	return false

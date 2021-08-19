@@ -4,11 +4,13 @@ onready var attention_area = get_node("Area2D")
 onready var parent = get_parent()
 onready var shoot_sound = get_node("ShootSound")
 onready var build_sound = get_node("BuildSound")
+onready var item_sprite = get_node("ItemSprite")
 
 var enemies_in_range = []
 
 var shoot_timer = 0
 
+var equipped_item = 0
 
 export(float) var shooting_time = 2
 
@@ -32,6 +34,16 @@ func _process(delta):
 		if len(enemies_in_range) >= 1:
 			shoot()
 		shoot_timer = 0
+	
+	if equipped_item > 0:
+		item_sprite.visible = true
+	else:
+		item_sprite.visible = false
+	
+func equip_item(item_id):
+	self.equipped_item = item_id
+	item_sprite.texture = Items.get_item_icon(item_id)
+	update_tower_stats_by_item()
 
 func update_grid():
 	var new_grid_vector = Grid.get_grid_position(position)
@@ -57,19 +69,36 @@ func shoot():
 		bullet_instance.target = enemies_in_range[0]
 	elif target_choice == "RANDOM":
 		bullet_instance.target = enemies_in_range[int(rand_range(0,len(enemies_in_range)-1))]
+	elif target_choice == "BUFF_BASED":
+		bullet_instance.target = enemies_in_range[0]
+		for enemy in enemies_in_range:
+			if !enemy.has_buff(bullet_type):
+				bullet_instance.target = enemy
+				break
 	bullet_instance.active = true
 	bullet_instance.damage = self.bullet_damage
 	bullet_instance.type = bullet_type
 
 func interact():
-	GameState.active_towers -= 1
-	queue_free()
+	if Entities.player.carried_item != 0:
+		self.equip_item(Entities.player.carried_item)
+		Entities.player.set_carried_item(0)
 
 func play_build_sound():
 	build_sound.play()
 	
-func upgrade_tower():
-	pass
 
 func get_info_text():
-	return "Hold F to destroy this tower"
+	if Entities.player.carried_item != 0:
+		return "Hold F to upgrade this tower with your item"
+	else:
+		return "You can buy items in the shop to upgrade towers"
+	
+func update_tower_stats_by_item():
+	if equipped_item == 1: #SLOWDOWN
+		bullet_type = "SLOWDOWN"
+	if equipped_item == 2: #DOUBLE DAMAGE
+		bullet_damage = 4
+	if equipped_item == 3: #BOMBS
+		#TODO
+		pass

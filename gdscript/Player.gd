@@ -11,6 +11,8 @@ onready var collision_shape = get_node("CollisionShape2D")
 onready var parent = get_parent()
 onready var animation_player = get_node("AnimationPlayer")
 
+onready var carried_item_sprite = get_node("CarriedItem")
+
 onready var interaction_charge_background = get_node("InteractionChargeBackground")
 onready var interaction_charge_bar = get_node("InteractionChargeBar")
 
@@ -20,16 +22,20 @@ var interaction_charge = 0
 var interaction_charge_needed = 0.3
 var interaction_locked = false
 
+var carried_item = 0
+
 func _ready():
 	interaction_radius.connect("body_entered", self, "body_entered_interaction_radius")
 	interaction_radius.connect("body_exited", self, "body_exited_interaction_radius")
 	
 	Signals.connect("trigger_build", self, "build")
 	Entities.player = self
+	
+	graphics_sprite.scale.x = -1
 
 func _process(delta):
 	process_interaction(delta)
-	if GameState.game_state != 2:
+	if GameState.game_state < 2:
 		process_movement(delta)
 		if GameState.game_state == 0:
 			process_input(delta)
@@ -43,6 +49,14 @@ func _process(delta):
 			self.visible = false
 			collision_shape.disabled = true
 	
+	if carried_item != 0:
+		carried_item_sprite.visible = true
+	else:
+		carried_item_sprite.visible = false
+
+func set_carried_item(item_id):
+	carried_item = item_id
+	carried_item_sprite.texture = Items.get_item_icon(item_id)
 
 func process_movement(delta):
 	var move_direction = Vector2(0,0)

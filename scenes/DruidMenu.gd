@@ -35,7 +35,7 @@ func _process(delta):
 		
 
 func cast_spell1():
-	if Resources.resources.gold > 25:
+	if Resources.resources.gold >= 25:
 		Resources.resources.gold -= 25
 		
 		GlobalEffects.tower_speed_multipliers.append(1.2)
@@ -46,7 +46,7 @@ func cast_spell1():
 	pass
 	
 func cast_spell2():
-	if Resources.resources.gold > 25:
+	if Resources.resources.gold >= 25:
 		Resources.resources.gold -= 25
 		
 		GlobalEffects.tower_damage_multipliers.append(1.25)

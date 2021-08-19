@@ -4,7 +4,6 @@ onready var categories_node = get_node("Categories")
 onready var towers_node = get_node("Towers")
 
 onready var basic_tower_node = get_node("Towers/Basic Tower")
-onready var slowdown_tower_node = get_node("Towers/Slowdown Tower")
 
 onready var supply_node = get_node("Supply")
 onready var house_wood_label = get_node("Supply/House/Label2")
@@ -45,9 +44,6 @@ func update_menu_state():
 		basic_tower_node.get_node("Wood").text = str(Prices.simple_tower.wood + GameState.active_towers * Prices.simple_tower.wood_increment)
 		basic_tower_node.get_node("Stone").text = str(Prices.simple_tower.stone + GameState.active_towers * Prices.simple_tower.stone_increment)
 		
-		slowdown_tower_node.get_node("Wood").text = str(Prices.slowdown_tower.wood + GameState.active_towers * Prices.simple_tower.wood_increment)
-		slowdown_tower_node.get_node("Stone").text = str(Prices.slowdown_tower.stone + GameState.active_towers * Prices.simple_tower.stone_increment)
-		
 	elif menu_state == "supply":
 		house_wood_label.text = str(Prices.house.wood + GameState.active_houses * Prices.house.wood_increment)
 		house_stone_label.text = str(Prices.house.stone + GameState.active_houses * Prices.house.stone_increment)
@@ -66,12 +62,6 @@ func check_keyboard_input():
 				Resources.resources["wood"] -= (Prices.simple_tower.wood + GameState.active_towers * Prices.simple_tower.wood_increment)
 				Resources.resources["stone"] -= (Prices.simple_tower.stone + GameState.active_towers * Prices.simple_tower.stone_increment)
 				Signals.emit_signal("trigger_build", Scenes.simple_tower)
-		if Input.is_action_just_pressed("2"):
-			if Resources.resources["wood"] >= (Prices.slowdown_tower.wood + GameState.active_towers * Prices.simple_tower.wood_increment) and Resources.resources["stone"] >= (Prices.slowdown_tower.stone + GameState.active_towers * Prices.simple_tower.stone_increment):
-				# CHECK SIGNAL BEFORE
-				Resources.resources["wood"] -= (Prices.slowdown_tower.wood + GameState.active_towers * Prices.simple_tower.wood_increment)
-				Resources.resources["stone"] -= (Prices.slowdown_tower.stone + GameState.active_towers * Prices.simple_tower.stone_increment)
-				Signals.emit_signal("trigger_build", Scenes.slowdown_tower)
 		elif Input.is_action_just_pressed("0"):
 			menu_state = "categories"
 	elif menu_state == "supply":
