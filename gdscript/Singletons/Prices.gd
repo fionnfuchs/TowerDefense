@@ -2,17 +2,10 @@ extends Node2D
 
 var simple_tower = {
 		"wood": 3,
-		"wood_increment": 2,
+		"wood_increment": 4,
 		"stone": 3,
-		"stone_increment": 2,
+		"stone_increment": 4,
 	}
-
-var slowdown_tower = {
-	"wood": 3,
-	"wood_increment": 2,
-	"stone": 3,
-	"stone_increment": 2,
-}
 
 var house = {
 	"wood": 3,

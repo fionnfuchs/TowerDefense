@@ -97,8 +97,10 @@ func get_info_text():
 func update_tower_stats_by_item():
 	if equipped_item == 1: #SLOWDOWN
 		bullet_type = "SLOWDOWN"
+		target_choice = "BUFF_BASED"
 	if equipped_item == 2: #DOUBLE DAMAGE
 		bullet_damage = 4
 	if equipped_item == 3: #BOMBS
-		#TODO
+		bullet_type = "BOMB"
+		target_choice = "RANDOM"
 		pass

@@ -25,7 +25,6 @@ func _ready():
 func update_navigation():
 	if navigation_2d != null:
 		self.path = navigation_2d.get_simple_path(position, target, false)
-		print(navigation_2d.get_closest_point_owner(position))
 	
 
 func die():
@@ -61,7 +60,6 @@ func process_movement(delta):
 			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta / 2)
 	
 	if !path or len(path) == 0:
-		print("Enemy left path")
 		var direction = target - position
 		if not "SLOWDOWN" in buffs:
 			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta)

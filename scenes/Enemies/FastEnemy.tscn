@@ -6,7 +6,7 @@
 [ext_resource path="res://sprites/prototype/shadow_simple.png" type="Texture" id=4]
 [ext_resource path="res://sounds/448080__breviceps__wet-click.wav" type="AudioStream" id=5]
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=1]
 radius = 6.26951
 
 [sub_resource type="Animation" id=2]
@@ -38,7 +38,7 @@ offset = Vector2( 0.143321, -7.92982 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="ShootThis" type="Node2D" parent="."]
 

@@ -33,7 +33,7 @@ func process_tutorial(delta):
 	if tutorial_state == 0:
 		show_current_tutorial_message()
 	if tutorial_state == 1:
-		if Resources.resources["wood"] >= 6 and Resources.resources["stone"] >= 6:
+		if Resources.resources["wood"] >= 4 and Resources.resources["stone"] >= 4:
 			show_current_tutorial_message()
 	if tutorial_state == 2:
 		if GameState.active_towers > 0:

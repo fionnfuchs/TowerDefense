@@ -22,7 +22,7 @@ onready var item_3_buy_button = $Item3/BuyButton
 
 var item_1_id = 1
 var item_2_id = 2
-var item_3_id = 0
+var item_3_id = 3
 
 func _ready():
 	cancel_button.connect("button_up", self, "cancel")
@@ -47,7 +47,7 @@ func _process(delta):
 	else:
 		item_1_name_label.text = Items.get_item_name(item_1_id)
 		item_1_description_label.text = Items.get_item_description(item_1_id)
-		item_1_cost_label.text = "Cost: " + str(Items.get_item_base_price(item_1_id))
+		item_1_cost_label.text = "Cost: " + str(Items.get_item_base_price(item_1_id) + 10 * GameState.items_bought)
 		item_1_icon_texture_rect.texture = Items.get_item_icon(item_1_id)
 		item_1_buy_button.disabled = false
 	
@@ -60,7 +60,7 @@ func _process(delta):
 	else:
 		item_2_name_label.text = Items.get_item_name(item_2_id)
 		item_2_description_label.text = Items.get_item_description(item_2_id)
-		item_2_cost_label.text = "Cost: " + str(Items.get_item_base_price(item_2_id))
+		item_2_cost_label.text = "Cost: " + str(Items.get_item_base_price(item_2_id) + 10 * GameState.items_bought)
 		item_2_icon_texture_rect.texture = Items.get_item_icon(item_2_id)
 		item_2_buy_button.disabled = false
 	
@@ -73,7 +73,7 @@ func _process(delta):
 	else:
 		item_3_name_label.text = Items.get_item_name(item_3_id)
 		item_3_description_label.text = Items.get_item_description(item_3_id)
-		item_3_cost_label.text = "Cost: " + str(Items.get_item_base_price(item_3_id))
+		item_3_cost_label.text = "Cost: " + str(Items.get_item_base_price(item_3_id) + 10 * GameState.items_bought)
 		item_3_icon_texture_rect.texture = Items.get_item_icon(item_3_id)
 		item_3_buy_button.disabled = false
 
@@ -81,19 +81,22 @@ func cancel():
 	GameState.set_game_state(0)
 
 func buy_item_1():
-	if Resources.resources["gold"] >= Items.get_item_base_price(item_1_id):
-		Resources.resources["gold"] -= Items.get_item_base_price(item_1_id)
+	if Resources.resources["gold"] >= Items.get_item_base_price(item_1_id) + 10 * GameState.items_bought:
+		Resources.resources["gold"] -= Items.get_item_base_price(item_1_id) + 10 * GameState.items_bought
 		Entities.player.set_carried_item(item_1_id)
+		GameState.items_bought += 1
 		item_1_id = 0
 
 func buy_item_2():
-	if Resources.resources["gold"] >= Items.get_item_base_price(item_2_id):
-		Resources.resources["gold"] -= Items.get_item_base_price(item_2_id)
+	if Resources.resources["gold"] >= Items.get_item_base_price(item_2_id) + 10 * GameState.items_bought:
+		Resources.resources["gold"] -= Items.get_item_base_price(item_2_id) + 10 * GameState.items_bought
 		Entities.player.set_carried_item(item_2_id)
+		GameState.items_bought += 1
 		item_2_id = 0
 
 func buy_item_3():
-	if Resources.resources["gold"] >= Items.get_item_base_price(item_3_id):
-		Resources.resources["gold"] -= Items.get_item_base_price(item_3_id)
+	if Resources.resources["gold"] >= Items.get_item_base_price(item_3_id) + 10 * GameState.items_bought:
+		Resources.resources["gold"] -= Items.get_item_base_price(item_3_id) + 10 * GameState.items_bought
 		Entities.player.set_carried_item(item_3_id)
+		GameState.items_bought += 1
 		item_3_id = 0

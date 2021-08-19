@@ -6,7 +6,7 @@
 [ext_resource path="res://sprites/prototype/shadow_simple.png" type="Texture" id=4]
 [ext_resource path="res://sounds/448080__breviceps__wet-click.wav" type="AudioStream" id=5]
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=1]
 radius = 6.26951
 
 [sub_resource type="Animation" id=2]
@@ -29,8 +29,8 @@ tracks/0/keys = {
 position = Vector2( 8, 127.097 )
 collision_mask = 2
 script = ExtResource( 2 )
-movement_speed = 1400
-max_hp = 15
+movement_speed = 1300
+max_hp = 18
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -0.0820808, 7.88445 )
@@ -39,7 +39,7 @@ offset = Vector2( 0.0820808, -7.88445 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="ShootThis" type="Node2D" parent="."]
 
