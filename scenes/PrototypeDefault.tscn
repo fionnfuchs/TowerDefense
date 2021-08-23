@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/prototype/portal_shadow.png" type="Texture" id=2]
@@ -24,12 +24,14 @@
 [ext_resource path="res://scenes/Resources/Stone.tscn" type="PackedScene" id=22]
 [ext_resource path="res://sprites/prototype/path_straight.png" type="Texture" id=23]
 [ext_resource path="res://scenes/Resources/Tree.tscn" type="PackedScene" id=24]
+[ext_resource path="res://sounds/coin_pickup.wav" type="AudioStream" id=25]
 [ext_resource path="res://tilesets/path.tres" type="TileSet" id=26]
 [ext_resource path="res://scenes/DruidMenu.gd" type="Script" id=27]
 [ext_resource path="res://sprites/prototype/tool_select_1.png" type="Texture" id=28]
 [ext_resource path="res://gdscript/UI/InteractionModeIndicator.gd" type="Script" id=29]
 [ext_resource path="res://gdscript/Audio/GlobalSounds.gd" type="Script" id=30]
-[ext_resource path="res://sounds/240781__f4ngy__coins-jingling.wav" type="AudioStream" id=32]
+[ext_resource path="res://sounds/wave_start.wav" type="AudioStream" id=31]
+[ext_resource path="res://sounds/explosion.wav" type="AudioStream" id=32]
 [ext_resource path="res://sprites/prototype/Items/prototype_item_1.png" type="Texture" id=33]
 [ext_resource path="res://gdscript/UI/ItemShopMenu.gd" type="Script" id=34]
 [ext_resource path="res://gdscript/Items/ItemShopEntity.gd" type="Script" id=35]
@@ -202,6 +204,7 @@ position = Vector2( -56, 88 )
 position = Vector2( -152, 40 )
 
 [node name="Stone4" parent="Entities" instance=ExtResource( 22 )]
+position = Vector2( -88, 24 )
 
 [node name="Home" type="StaticBody2D" parent="Entities"]
 position = Vector2( 8, -32 )
@@ -300,9 +303,9 @@ __meta__ = {
 
 [node name="wood_icon" type="TextureRect" parent="CanvasLayer/PrototypeResourcePanel"]
 margin_left = 16.0887
-margin_top = 22.2192
+margin_top = 15.6416
 margin_right = 36.0887
-margin_bottom = 42.2192
+margin_bottom = 35.6416
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 5
@@ -312,9 +315,9 @@ __meta__ = {
 
 [node name="stone_icon" type="TextureRect" parent="CanvasLayer/PrototypeResourcePanel"]
 margin_left = 16.0887
-margin_top = 54.6946
+margin_top = 53.2329
 margin_right = 36.0887
-margin_bottom = 74.6945
+margin_bottom = 73.2328
 texture = ExtResource( 9 )
 expand = true
 stretch_mode = 5
@@ -324,9 +327,9 @@ __meta__ = {
 
 [node name="gold_icon" type="TextureRect" parent="CanvasLayer/PrototypeResourcePanel"]
 margin_left = 16.0887
-margin_top = 85.3823
+margin_top = 90.2546
 margin_right = 36.0887
-margin_bottom = 105.382
+margin_bottom = 110.254
 texture = ExtResource( 21 )
 expand = true
 stretch_mode = 5
@@ -335,10 +338,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="CanvasLayer/PrototypeResourcePanel"]
-margin_left = 43.2563
-margin_top = 20.1309
-margin_right = 118.256
-margin_bottom = 120.131
+margin_left = 43.0126
+margin_top = 16.0
+margin_right = 118.012
+margin_bottom = 116.0
 custom_fonts/font = ExtResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -378,6 +381,7 @@ __meta__ = {
 }
 
 [node name="PrototypeBuildMenu" type="Control" parent="CanvasLayer"]
+visible = false
 anchor_left = 0.1
 anchor_top = 0.7
 anchor_right = 0.9
@@ -706,6 +710,7 @@ __meta__ = {
 }
 
 [node name="ItemShopMenu" type="Panel" parent="CanvasLayer"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.7
 anchor_right = 0.5
@@ -955,6 +960,7 @@ __meta__ = {
 }
 
 [node name="TipMenu" type="Panel" parent="CanvasLayer"]
+visible = false
 self_modulate = Color( 0.57, 0.66, 1.3, 1 )
 anchor_left = 0.5
 anchor_top = 0.7
@@ -1018,4 +1024,10 @@ tile_data = PoolIntArray( -4, 0, 65537, -3, 0, 1, -2, 0, 1, -1, 0, 1, -65536, 0,
 script = ExtResource( 30 )
 
 [node name="CollectCoin" type="AudioStreamPlayer2D" parent="GlobalSounds"]
+stream = ExtResource( 25 )
+
+[node name="WaveStart" type="AudioStreamPlayer2D" parent="GlobalSounds"]
+stream = ExtResource( 31 )
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="GlobalSounds"]
 stream = ExtResource( 32 )

@@ -17,6 +17,7 @@ func _process(delta):
 	
 func interact():
 	GameState.set_game_state(1)
+	Signals.emit_signal("play_global_sound", "WaveStart")
 	Entities.wave_spawner.spawn_wave()
 	Entities.player.interaction_target = null
 

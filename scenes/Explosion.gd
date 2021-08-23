@@ -4,7 +4,7 @@ onready var timer = $Timer
 onready var damage_timer = $DamageTimer
 onready var damage_area = $Area2D
 
-var damage = 1
+var damage = 0.5
 
 func _ready():
 	timer.connect("timeout", self, "destroy")
@@ -14,7 +14,7 @@ func apply_damage():
 	var overlapping_bodies = damage_area.get_overlapping_bodies()
 	for body in overlapping_bodies:
 		if body.has_method("get_hit"):
-			body.get_hit(1)
+			body.get_hit(damage)
 
 func destroy():
 	queue_free()

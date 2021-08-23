@@ -98,9 +98,11 @@ func update_tower_stats_by_item():
 	if equipped_item == 1: #SLOWDOWN
 		bullet_type = "SLOWDOWN"
 		target_choice = "BUFF_BASED"
+		bullet_damage = 0.5
+		shooting_time = 1.2
 	if equipped_item == 2: #DOUBLE DAMAGE
-		bullet_damage = 4
+		bullet_damage = 2
 	if equipped_item == 3: #BOMBS
+		bullet_damage = 1
 		bullet_type = "BOMB"
 		target_choice = "RANDOM"
-		pass

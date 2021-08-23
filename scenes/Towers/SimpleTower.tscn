@@ -3,8 +3,8 @@
 [ext_resource path="res://sprites/prototype/tower_placeholder.png" type="Texture" id=1]
 [ext_resource path="res://gdscript/Towers/Tower.gd" type="Script" id=2]
 [ext_resource path="res://sprites/prototype/shadow_simple.png" type="Texture" id=3]
-[ext_resource path="res://sounds/399934__old-waveplay__perc-short-click-snap-perc.wav" type="AudioStream" id=4]
-[ext_resource path="res://sounds/136771_otbtechno_wood-on-wood.wav" type="AudioStream" id=5]
+[ext_resource path="res://sounds/shoot.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/build.wav" type="AudioStream" id=5]
 [ext_resource path="res://sprites/prototype/Items/prototype_item_1.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -14,10 +14,11 @@ extents = Vector2( 8.24355, 5.66637 )
 radius = 53.6428
 
 [node name="SimpleTower" type="StaticBody2D"]
+position = Vector2( -0.744751, 0.744751 )
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 2 )
-shooting_time = 0.8
+shooting_time = 0.7
 bullet_damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

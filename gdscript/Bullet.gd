@@ -45,4 +45,5 @@ func hit_target():
 		var explosion_instance = Scenes.explosion.instance()
 		explosion_instance.position = self.position
 		get_parent().add_child(explosion_instance)
+		Signals.emit_signal("play_global_sound", "Explosion")
 	queue_free()

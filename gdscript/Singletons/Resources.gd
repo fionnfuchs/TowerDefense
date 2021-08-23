@@ -1,8 +1,8 @@
 extends Node
 
 var resources = {
-	"wood": 0,
-	"stone": 0,
+	"wood": 2,
+	"stone": 2,
 	"gold": 0
 }
 

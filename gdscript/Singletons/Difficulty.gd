@@ -7,4 +7,4 @@ func _ready():
 	pass
 
 func raise_difficulty(delta):
-	difficulty += 0.03 * delta
+	difficulty += 0.02 * delta
