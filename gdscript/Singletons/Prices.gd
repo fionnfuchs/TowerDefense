@@ -6,10 +6,3 @@ var simple_tower = {
 		"stone": 3,
 		"stone_increment": 4,
 	}
-
-var house = {
-	"wood": 3,
-	"wood_increment": 1,
-	"stone": 3,
-	"stone_increment": 1,
-}
