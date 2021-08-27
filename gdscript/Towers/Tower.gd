@@ -13,15 +13,18 @@ var shoot_timer = 0
 var equipped_item = 0
 
 export(float) var shooting_time = 2
+export(float) var attention_radius = 45
 
 export(String) var bullet_buffs = []
 export(String) var target_choice = "FOCUS"
 export(int) var bullet_damage = 1
 
+
 var grid_vector = Vector2()
 
 func _ready():
 	update_grid()
+	update_attention_radius()
 	
 	attention_area.connect("body_entered", self, "body_entered_attention_area")
 	attention_area.connect("body_exited", self, "body_exited_attention_area")
@@ -109,3 +112,9 @@ func update_tower_stats_by_item():
 	if equipped_item == 4:
 		bullet_damage = 0.5
 		shooting_time = 0.15
+	if equipped_item == 5:
+		attention_radius = 75
+		update_attention_radius()
+
+func update_attention_radius():
+	attention_area.get_node("CollisionShape2D").get_shape().set_radius(attention_radius)

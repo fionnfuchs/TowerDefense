@@ -22,7 +22,7 @@ onready var item_3_buy_button = $Item3/BuyButton
 
 var item_1_id = 1
 var item_2_id = 2
-var item_3_id = 4
+var item_3_id = 5
 
 func _ready():
 	cancel_button.connect("button_up", self, "cancel")
