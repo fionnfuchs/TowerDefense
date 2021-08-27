@@ -4,8 +4,10 @@ extends Node
 var simple_tower = preload("res://scenes/Towers/SimpleTower.tscn")
 
 var simple_enemy = preload("res://scenes/Enemies/BasicEnemy.tscn")
+var simple_enemy_stronger = preload("res://scenes/Enemies/BasicEnemyStronger.tscn")
 var fast_enemy = preload("res://scenes/Enemies/FastEnemy.tscn")
 var tank_enemy = preload("res://scenes/Enemies/TankEnemy.tscn")
+var tank_enemy_2 = preload("res://scenes/Enemies/TankEnemy2.tscn")
 
 var basic_bullet = preload("res://scenes/Towers/Bullet.tscn")
 

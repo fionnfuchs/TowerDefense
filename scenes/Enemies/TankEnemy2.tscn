@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://sprites/prototype/enemies/prototype_enemy_2.png" type="Texture" id=1]
+[ext_resource path="res://sprites/prototype/enemies/enemy_tank_2.png" type="Texture" id=1]
 [ext_resource path="res://gdscript/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://sprites/prototype/pixel.png" type="Texture" id=3]
 [ext_resource path="res://sprites/prototype/shadow_simple.png" type="Texture" id=4]
@@ -25,16 +25,17 @@ tracks/0/keys = {
 "values": [ 0.0, 5.0, -5.0, 0.0 ]
 }
 
-[node name="FastEnemy" type="KinematicBody2D"]
+[node name="TankEnemy" type="KinematicBody2D"]
 position = Vector2( 8, 127.097 )
 collision_mask = 2
 script = ExtResource( 2 )
-movement_speed = 2500
+movement_speed = 1500
+max_hp = 25
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -0.143321, 7.92982 )
+position = Vector2( -0.0820808, 7.88445 )
 texture = ExtResource( 1 )
-offset = Vector2( 0.143321, -7.92982 )
+offset = Vector2( 0.0820808, -7.88445 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2 )

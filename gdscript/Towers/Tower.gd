@@ -14,7 +14,7 @@ var equipped_item = 0
 
 export(float) var shooting_time = 2
 
-export(String) var bullet_type = "NORMAL"
+export(String) var bullet_buffs = []
 export(String) var target_choice = "FOCUS"
 export(int) var bullet_damage = 1
 
@@ -72,12 +72,12 @@ func shoot():
 	elif target_choice == "BUFF_BASED":
 		bullet_instance.target = enemies_in_range[0]
 		for enemy in enemies_in_range:
-			if !enemy.has_buff(bullet_type):
+			if !enemy.has_buff(bullet_buffs[0]):
 				bullet_instance.target = enemy
 				break
 	bullet_instance.active = true
 	bullet_instance.damage = self.bullet_damage
-	bullet_instance.type = bullet_type
+	bullet_instance.buffs = bullet_buffs
 
 func interact():
 	if Entities.player.carried_item != 0:
@@ -96,7 +96,7 @@ func get_info_text():
 	
 func update_tower_stats_by_item():
 	if equipped_item == 1: #SLOWDOWN
-		bullet_type = "SLOWDOWN"
+		bullet_buffs = ["SLOWDOWN"]
 		target_choice = "BUFF_BASED"
 		bullet_damage = 0.5
 		shooting_time = 1.2
@@ -104,5 +104,8 @@ func update_tower_stats_by_item():
 		bullet_damage = 2
 	if equipped_item == 3: #BOMBS
 		bullet_damage = 1
-		bullet_type = "BOMB"
+		bullet_buffs = ["BOMB"]
 		target_choice = "RANDOM"
+	if equipped_item == 4:
+		bullet_damage = 0.5
+		shooting_time = 0.15

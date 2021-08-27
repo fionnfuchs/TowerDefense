@@ -19,7 +19,7 @@ var path = null
 
 func _ready():
 	Entities.enemies.append(self)
-	self.max_hp = max_hp * GlobalEffects.get_total_enemy_health_multiplier() + floor(Difficulty.difficulty)
+	self.max_hp = max_hp * GlobalEffects.get_total_enemy_health_multiplier() + (max_hp/100) * floor(Difficulty.difficulty)
 	self.hp = self.max_hp
 	
 func update_navigation():
@@ -57,14 +57,14 @@ func process_movement(delta):
 		if not "SLOWDOWN" in buffs:
 			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta)
 		else:
-			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta / 2)
+			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta / 1.6)
 	
 	if !path or len(path) == 0:
 		var direction = target - position
 		if not "SLOWDOWN" in buffs:
 			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta)
 		else:
-			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta / 2)
+			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta / 1.6)
 
 func get_hit(damage):
 	hitsound.play()

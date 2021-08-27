@@ -3,6 +3,6 @@ extends Node
 var resources = {
 	"wood": 2,
 	"stone": 2,
-	"gold": 0
+	"gold": 40
 }
 
