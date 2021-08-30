@@ -16,6 +16,8 @@ var gold_pickup = preload("res://scenes/Resources/Gold.tscn")
 var explosion = preload("res://scenes/Effects/Explosion.tscn")
 var simple_hit = preload("res://scenes/Effects/SimpleHit.tscn")
 
+var gold_chest = preload("res://scenes/MapObjects/GoldChest.tscn")
+
 
 #TEXTURES:
 var simple_bullet_texture = preload("res://sprites/prototype/prototype_bullet.png")

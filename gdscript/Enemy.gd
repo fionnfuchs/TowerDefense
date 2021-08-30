@@ -19,7 +19,7 @@ var path = null
 
 func _ready():
 	Entities.enemies.append(self)
-	self.max_hp = max_hp * GlobalEffects.get_total_enemy_health_multiplier() + (max_hp/100) * floor(Difficulty.difficulty)
+	self.max_hp = max_hp * GlobalEffects.get_total_enemy_health_multiplier() + (max_hp/55) * floor(Difficulty.difficulty)
 	self.hp = self.max_hp
 	
 func update_navigation():

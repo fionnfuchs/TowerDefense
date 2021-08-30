@@ -7,12 +7,12 @@ onready var parent = get_parent()
 # {DEFAULT, PROB:[ENEMY_SCENE, CHANCE]}
 
 var wave_types = [
-	{"default": Scenes.simple_enemy, "probabilities": [], "repeat": 3},
-	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.fast_enemy, 0.4]], "repeat": 3},
-	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.fast_enemy, 0.3], [Scenes.tank_enemy, 0.1]], "repeat": 4},
+	{"default": Scenes.simple_enemy, "probabilities": [], "repeat": 4},
+	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.fast_enemy, 0.3]], "repeat": 3},
+	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.fast_enemy, 0.2], [Scenes.tank_enemy, 0.1]], "repeat": 4},
 	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.simple_enemy_stronger, 0.4]], "repeat": 1},
-	{"default": Scenes.simple_enemy_stronger, "probabilities": [[Scenes.fast_enemy, 0.2], [Scenes.tank_enemy, 0.1]], "repeat": 2},
-	{"default": Scenes.simple_enemy_stronger, "probabilities": [[Scenes.fast_enemy, 0.2], [Scenes.tank_enemy_2, 0.1]], "repeat": 2},
+	{"default": Scenes.simple_enemy_stronger, "probabilities": [[Scenes.fast_enemy, 0.3], [Scenes.tank_enemy, 0.2]], "repeat": 2},
+	{"default": Scenes.simple_enemy_stronger, "probabilities": [[Scenes.fast_enemy, 0.3], [Scenes.tank_enemy_2, 0.1]], "repeat": 2},
 ]
 
 var current_wave_type = 0
@@ -55,7 +55,7 @@ func chance(chance):
 func check_state_condition():
 	if len(Entities.enemies) <= 0:
 		# Wave is beaten
-		Signals.emit_signal("wave_beaten", 1)
+		Signals.emit_signal("wave_beaten", Difficulty.current_wave)
 		GameState.set_game_state(0)
 		print("INFO: Wave beaten.")
 

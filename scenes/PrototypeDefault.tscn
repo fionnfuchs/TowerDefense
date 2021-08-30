@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/prototype/portal_shadow.png" type="Texture" id=2]
@@ -37,6 +37,7 @@
 [ext_resource path="res://gdscript/Items/ItemShopEntity.gd" type="Script" id=35]
 [ext_resource path="res://sprites/prototype/Items/prototype_item_shop.png" type="Texture" id=36]
 [ext_resource path="res://scenes/TipMenu.gd" type="Script" id=37]
+[ext_resource path="res://scenes/MapObjectHandler.gd" type="Script" id=39]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -276,6 +277,9 @@ scale = Vector2( 2, 1 )
 z_index = -1
 texture = ExtResource( 6 )
 
+[node name="MapObjectHandler" type="Node2D" parent="Entities"]
+script = ExtResource( 39 )
+
 [node name="BackgroundGrid" type="TileMap" parent="."]
 z_index = -5
 tile_set = ExtResource( 7 )
@@ -381,10 +385,9 @@ __meta__ = {
 }
 
 [node name="PrototypeBuildMenu" type="Control" parent="CanvasLayer"]
-visible = false
-anchor_left = 0.1
+anchor_left = 0.37
 anchor_top = 0.7
-anchor_right = 0.9
+anchor_right = 0.63
 anchor_bottom = 1.0
 script = ExtResource( 12 )
 __meta__ = {

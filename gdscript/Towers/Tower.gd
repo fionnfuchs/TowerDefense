@@ -5,6 +5,7 @@ onready var parent = get_parent()
 onready var shoot_sound = get_node("ShootSound")
 onready var build_sound = get_node("BuildSound")
 onready var item_sprite = get_node("ItemSprite")
+onready var radius_sprite = get_node("Radius")
 
 var enemies_in_range = []
 
@@ -102,7 +103,7 @@ func update_tower_stats_by_item():
 		bullet_buffs = ["SLOWDOWN"]
 		target_choice = "BUFF_BASED"
 		bullet_damage = 0.5
-		shooting_time = 1.2
+		shooting_time = 1.0
 	if equipped_item == 2: #DOUBLE DAMAGE
 		bullet_damage = 2
 	if equipped_item == 3: #BOMBS
@@ -118,3 +119,5 @@ func update_tower_stats_by_item():
 
 func update_attention_radius():
 	attention_area.get_node("CollisionShape2D").get_shape().set_radius(attention_radius)
+	radius_sprite.scale.x = 1.4 * (attention_radius / 45.0)
+	radius_sprite.scale.y = 1.4 * (attention_radius / 45.0)
