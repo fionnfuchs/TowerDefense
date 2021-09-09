@@ -28,7 +28,7 @@ func _process(delta):
 			if direction.length() < 6:
 				hit_target()
 			else:
-				self.position += direction.normalized() * movement_speed * delta
+				self.position += direction.normalized() * movement_speed * delta * GameState.time_speed
 		else:
 			queue_free()
 	

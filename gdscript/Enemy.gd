@@ -55,16 +55,16 @@ func process_movement(delta):
 		var direction = path[0] - position
 		direction = direction.normalized()
 		if not "SLOWDOWN" in buffs:
-			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta)
+			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta * GameState.time_speed)
 		else:
-			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta / 1.6)
+			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta / 1.6 * GameState.time_speed)
 	
 	if !path or len(path) == 0:
 		var direction = target - position
 		if not "SLOWDOWN" in buffs:
-			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta)
+			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta * GameState.time_speed)
 		else:
-			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta / 1.6)
+			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta / 1.6 * GameState.time_speed)
 
 func get_hit(damage):
 	hitsound.play()

@@ -15,4 +15,5 @@ func pick_up():
 	Resources.resources[resource_name] += amount
 	if resource_name == "gold":
 		Signals.emit_signal("play_global_sound", "CollectCoin")
-	queue_free()
+		Signals.emit_signal("gold_updated")
+		queue_free()

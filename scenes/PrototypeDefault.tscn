@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/prototype/portal_shadow.png" type="Texture" id=2]
@@ -37,7 +37,10 @@
 [ext_resource path="res://gdscript/Items/ItemShopEntity.gd" type="Script" id=35]
 [ext_resource path="res://sprites/prototype/Items/prototype_item_shop.png" type="Texture" id=36]
 [ext_resource path="res://scenes/TipMenu.gd" type="Script" id=37]
+[ext_resource path="res://scenes/Effects/ExclamationSymbol.tscn" type="PackedScene" id=38]
 [ext_resource path="res://scenes/MapObjectHandler.gd" type="Script" id=39]
+[ext_resource path="res://gdscript/UI/FastForward.gd" type="Script" id=40]
+[ext_resource path="res://sprites/prototype/ui/fast_forward.png" type="Texture" id=41]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -260,6 +263,8 @@ region_rect = Rect2( 0, 0, 16, 512 )
 [node name="ItemShop" type="StaticBody2D" parent="Entities"]
 position = Vector2( 192, 24 )
 script = ExtResource( 35 )
+
+[node name="ExclamationSymbol" parent="Entities/ItemShop" instance=ExtResource( 38 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/ItemShop"]
 rotation = 1.5708
@@ -1012,6 +1017,34 @@ margin_right = -10.0
 margin_bottom = -10.0
 custom_fonts/font = ExtResource( 19 )
 autowrap = true
+
+[node name="FastForward" type="TextureRect" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -107.808
+margin_top = -122.153
+margin_right = -7.80811
+margin_bottom = -12.153
+texture = ExtResource( 41 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CanvasLayer/FastForward"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = 40.1558
+margin_right = 50.0
+margin_bottom = 60.1558
+text = "Fast Forward"
 
 [node name="PathNavigation2D" type="Navigation2D" parent="."]
 

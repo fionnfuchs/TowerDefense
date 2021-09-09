@@ -21,8 +21,8 @@ onready var item_3_cost_label = $Item3/CostLabel
 onready var item_3_buy_button = $Item3/BuyButton
 
 var item_1_id = 1
-var item_2_id = 2
-var item_3_id = 5
+var item_2_id = 0
+var item_3_id = 4
 
 func _ready():
 	cancel_button.connect("button_up", self, "cancel")
@@ -30,6 +30,9 @@ func _ready():
 	item_1_buy_button.connect("button_up", self, "buy_item_1")
 	item_2_buy_button.connect("button_up", self, "buy_item_2")
 	item_3_buy_button.connect("button_up", self, "buy_item_3")
+	
+	Signals.connect("wave_beaten", self, "on_wave_beaten")
+	Signals.connect("gold_updated", self, "update_exclamation_symbol")
 
 func _process(delta):
 	if GameState.game_state == 3:
@@ -86,6 +89,7 @@ func buy_item_1():
 		Entities.player.set_carried_item(item_1_id)
 		GameState.items_bought += 1
 		item_1_id = 0
+		update_exclamation_symbol()
 
 func buy_item_2():
 	if Resources.resources["gold"] >= Items.get_item_base_price(item_2_id) + 10 * GameState.items_bought:
@@ -93,6 +97,7 @@ func buy_item_2():
 		Entities.player.set_carried_item(item_2_id)
 		GameState.items_bought += 1
 		item_2_id = 0
+		update_exclamation_symbol()
 
 func buy_item_3():
 	if Resources.resources["gold"] >= Items.get_item_base_price(item_3_id) + 10 * GameState.items_bought:
@@ -100,3 +105,28 @@ func buy_item_3():
 		Entities.player.set_carried_item(item_3_id)
 		GameState.items_bought += 1
 		item_3_id = 0
+		update_exclamation_symbol()
+
+func on_wave_beaten(wave_number):
+	if wave_number > 5:
+		if wave_number % 3 == 0:
+			reroll_item_2()
+
+func update_exclamation_symbol():
+	if can_buy_item():
+		Entities.item_shop.exclamation_symbol.visible = true
+	else:
+		Entities.item_shop.exclamation_symbol.visible = false
+
+func reroll_item_2():
+	item_2_id = rand_range(1,5)
+	update_exclamation_symbol()
+
+func can_buy_item():
+	if item_1_id > 0 and Resources.resources["gold"] >= Items.get_item_base_price(item_1_id) + 10 * GameState.items_bought:
+		return true
+	if item_1_id > 0 and Resources.resources["gold"] >= Items.get_item_base_price(item_2_id) + 10 * GameState.items_bought:
+		return true
+	if item_1_id > 0 and Resources.resources["gold"] >= Items.get_item_base_price(item_3_id) + 10 * GameState.items_bought:
+		return true
+	return false

@@ -34,7 +34,7 @@ func _ready():
 
 func _process(delta):
 	shoot_timer += delta
-	if shoot_timer >= (shooting_time * (1 / GlobalEffects.get_total_tower_speed_multiplier())):
+	if shoot_timer >= (shooting_time * (1 / GlobalEffects.get_total_tower_speed_multiplier())) / GameState.time_speed:
 		if len(enemies_in_range) >= 1:
 			shoot()
 		shoot_timer = 0

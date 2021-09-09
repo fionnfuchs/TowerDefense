@@ -7,6 +7,8 @@ var active_towers = 0
 
 var items_bought = 0
 
+var time_speed = 1
+
 signal game_state_changed(new_state)
 signal interaction_mode_changed(new_mode)
 

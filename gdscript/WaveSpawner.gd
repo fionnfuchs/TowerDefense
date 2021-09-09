@@ -7,9 +7,9 @@ onready var parent = get_parent()
 # {DEFAULT, PROB:[ENEMY_SCENE, CHANCE]}
 
 var wave_types = [
-	{"default": Scenes.simple_enemy, "probabilities": [], "repeat": 4},
-	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.fast_enemy, 0.3]], "repeat": 3},
-	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.fast_enemy, 0.2], [Scenes.tank_enemy, 0.1]], "repeat": 4},
+	{"default": Scenes.simple_enemy, "probabilities": [], "repeat": 3},
+	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.fast_enemy, 0.3]], "repeat": 4},
+	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.fast_enemy, 0.2], [Scenes.tank_enemy, 0.1]], "repeat": 5},
 	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.simple_enemy_stronger, 0.4]], "repeat": 1},
 	{"default": Scenes.simple_enemy_stronger, "probabilities": [[Scenes.fast_enemy, 0.3], [Scenes.tank_enemy, 0.2]], "repeat": 2},
 	{"default": Scenes.simple_enemy_stronger, "probabilities": [[Scenes.fast_enemy, 0.3], [Scenes.tank_enemy_2, 0.1]], "repeat": 2},
@@ -25,10 +25,10 @@ func spawn_wave():
 	print("INFO: Spawning wave " + str(Difficulty.current_wave) + " with wave type " + str(current_wave_type))
 	var position_index = 0
 	
-	for i in range(round(1 + (Difficulty.current_wave - 1) * 1.5)):
+	for i in range(round(1 + (Difficulty.current_wave - 1) * 1.3)):
 		var enemy_spawned = false
 		for prob_enemy in wave_types[current_wave_type]["probabilities"]:
-			print(prob_enemy)
+			#print(prob_enemy)
 			if chance(prob_enemy[1]):
 				spawn_enemy(position_index, prob_enemy[0])
 				position_index += rand_range(0.5,1)
