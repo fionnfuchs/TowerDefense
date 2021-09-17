@@ -9,6 +9,7 @@ onready var tower_build_button = $Tower/Button
 onready var current_tower_price = calculate_tower_prices()
 
 func _ready():
+	Entities.build_menu = self
 	tower_build_button.connect("button_up", self, "build_tower")
 
 func _process(delta):
@@ -47,8 +48,6 @@ func update_ui():
 func build_tower():
 	if Resources.resources["wood"] >= current_tower_price["wood"] && Resources.resources["stone"] >= current_tower_price["stone"]:
 		Signals.emit_signal("trigger_build", simple_tower)
-		Resources.resources["wood"] -= current_tower_price["wood"]
-		Resources.resources["stone"] -= current_tower_price["stone"]
 
 func calculate_tower_prices():
 	return {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/prototype/portal_shadow.png" type="Texture" id=2]
@@ -41,6 +41,9 @@
 [ext_resource path="res://scenes/MapObjectHandler.gd" type="Script" id=39]
 [ext_resource path="res://gdscript/UI/FastForward.gd" type="Script" id=40]
 [ext_resource path="res://sprites/prototype/ui/fast_forward.png" type="Texture" id=41]
+[ext_resource path="res://gdscript/MapObjects/PathTiles.gd" type="Script" id=42]
+[ext_resource path="res://gdscript/UI/NotificationPanel.gd" type="Script" id=43]
+[ext_resource path="res://sprites/prototype/exclamation_symbol.png" type="Texture" id=44]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -1046,6 +1049,42 @@ margin_right = 50.0
 margin_bottom = 60.1558
 text = "Fast Forward"
 
+[node name="NotificationPanel" type="Panel" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -250.0
+margin_top = -40.0
+margin_right = 250.0
+script = ExtResource( 43 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/NotificationPanel"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 35.0
+margin_bottom = 35.0
+texture = ExtResource( 44 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/NotificationPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+custom_fonts/font = ExtResource( 19 )
+text = "Item shop has new items!"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="CanvasLayer/NotificationPanel"]
+wait_time = 2.5
+
 [node name="PathNavigation2D" type="Navigation2D" parent="."]
 
 [node name="PathTiles" type="TileMap" parent="PathNavigation2D"]
@@ -1055,6 +1094,7 @@ tile_set = ExtResource( 26 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( -4, 0, 65537, -3, 0, 1, -2, 0, 1, -1, 0, 1, -65536, 0, 131075, 65532, 0, 0, 131068, 0, 0, 196604, 0, 65536, 196605, 0, 1, 196606, 0, 131073, 262142, 0, 65536, 262143, 0, 1, 196608, 0, 1, 196609, 0, 1, 196610, 0, 1, 196611, 0, 1, 196612, 0, 131073, 262148, 0, 0, 327684, 0, 0, 458749, 0, 65537, 458750, 0, 1, 458751, 0, 1, 393216, 0, 1, 393217, 0, 1, 393218, 0, 1, 393219, 0, 1, 393220, 0, 131072, 524285, 0, 0, 589821, 0, 0, 655357, 0, 65536, 655358, 0, 1, 655359, 0, 1, 589824, 0, 1, 589825, 0, 1, 589826, 0, 1, 589827, 0, 131073, 655363, 0, 0, 720896, 0, 65537, 720897, 0, 1, 720898, 0, 1, 720899, 0, 131072, 786432, 0, 0, 851968, 0, 65536, 851969, 0, 1, 851970, 0, 1, 851971, 0, 1, 851972, 0, 1, 851973, 0, 131073, 917509, 0, 0, 983045, 0, 0, 1048581, 0, 0, 1114117, 0, 0, 1179653, 0, 0, 1245189, 0, 65538 )
+script = ExtResource( 42 )
 
 [node name="GlobalSounds" type="Node2D" parent="."]
 script = ExtResource( 30 )

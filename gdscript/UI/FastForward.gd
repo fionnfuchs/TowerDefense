@@ -24,5 +24,5 @@ func toggle_time_speed():
 		GameState.time_speed = 1
 	print(GameState.time_speed)
 
-func reset_time_speed():
+func reset_time_speed(wave_number):
 	GameState.time_speed = 1

@@ -156,7 +156,10 @@ func body_exited_interaction_radius(body):
 
 func build(building):
 	var grid_vector = Grid.get_grid_position(position)
-	if Grid.get_grid_value(grid_vector) == 0:
+	if Grid.get_grid_value(grid_vector) == 0 and Entities.path_tiles.is_free_position(position.x, position.y):
+		Resources.resources["wood"] -= Entities.build_menu.current_tower_price["wood"]
+		Resources.resources["stone"] -= Entities.build_menu.current_tower_price["stone"]
+		
 		var building_instance = building.instance()
 		parent.add_child(building_instance)
 		building_instance.global_position = Grid.grid_to_world_position(grid_vector)
