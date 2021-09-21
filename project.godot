@@ -31,6 +31,7 @@ Debug="*res://gdscript/Singletons/Debug.gd"
 Prices="*res://gdscript/Singletons/Prices.gd"
 GlobalEffects="*res://gdscript/Singletons/GlobalEffects.gd"
 Items="*res://gdscript/Items/Items.gd"
+Persistence="*res://gdscript/Singletons/Persistence.gd"
 
 [display]
 

@@ -64,3 +64,6 @@ func init_grid():
 		for x in range(width):
 			row.append(0)
 		grid.append(row)
+	
+func reset():
+	init_grid()

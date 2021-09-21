@@ -14,6 +14,8 @@ func _process(delta):
 		health_bar.get_parent().visible = true
 		health_bar.scale.x = float(hp) / 3
 		health_bar.position.x = (1 - float(hp) / 3) * -8
+	if hp <= 0:
+		GameState.game_state = 9999
 	
 func interact():
 	GameState.set_game_state(1)

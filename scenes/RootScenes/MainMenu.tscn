@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://uitheme/PixeledDynamicFontNoOutline.tres" type="DynamicFont" id=1]
+[ext_resource path="res://uitheme/PixeledDynamicFontH1.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scenes/Map/BackgroundGrid.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gdscript/UI/MainMenuPanel.gd" type="Script" id=4]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="BackgroundGrid" parent="." instance=ExtResource( 3 )]
+position = Vector2( 516.985, 243.826 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenuPanel" type="Panel" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -100.0
+margin_right = 200.0
+margin_bottom = 100.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CanvasLayer/MainMenuPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -20.0
+margin_right = 150.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 1 )
+text = "Play Demo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenuPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -150.0
+margin_top = 40.0
+margin_right = 150.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 1 )
+text = "Highscore: 1 waves survived"
+align = 1
+valign = 1
+
+[node name="TowerDefenseH" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.2
+margin_left = -400.0
+margin_right = 400.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 2 )
+text = "Tower Defense"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

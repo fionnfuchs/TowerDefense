@@ -1,6 +1,6 @@
 extends Node
 
-var game_state = 0
+var game_state = 0 # 0 = Player Visible Walking State, 1 = Wave incoming, 2 = Druid Menu, 3 = Item Shop, 9999 = Lost
 var interaction_mode = 0
 
 var active_towers = 0
@@ -22,3 +22,10 @@ func set_interaction_mode(new_mode):
 func set_game_state(new_state):
 	self.game_state = new_state
 	emit_signal("game_state_changed", new_state)
+
+func reset():
+	game_state = 0
+	interaction_mode = 0
+	active_towers = 0
+	items_bought = 0
+	time_speed = 1

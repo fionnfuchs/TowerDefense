@@ -41,3 +41,11 @@ func get_total_tower_speed_multiplier():
 	for multiplier in tower_speed_multipliers:
 		total_multiplier *= multiplier
 	return total_multiplier
+
+func reset():
+	enemy_speed_multipliers = []
+	enemy_health_multipliers = []
+	
+	resource_gathering_multipliers = []
+	tower_damage_multipliers = []
+	tower_speed_multipliers = []
