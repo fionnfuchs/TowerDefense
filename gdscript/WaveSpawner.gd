@@ -18,6 +18,8 @@ var wave_types = [
 var current_wave_type = 0
 var wave_type_counter = 0
 
+onready var spawn_points = get_children()
+
 func _ready():
 	Entities.wave_spawner = self
 
@@ -60,7 +62,12 @@ func check_state_condition():
 		print("INFO: Wave beaten.")
 
 func spawn_enemy(position_index, enemy_scene):
+	var spawn_position = position
+	if len(spawn_points) > 0:
+		var r_spawn_point_index = rand_range(0, len(spawn_points))
+		spawn_position = spawn_points[r_spawn_point_index].global_position
+	
 	var enemy_instance = enemy_scene.instance()
 	parent.add_child(enemy_instance)
-	enemy_instance.position = Vector2(position.x, position.y + position_index * 32)
+	enemy_instance.position = Vector2(spawn_position.x, spawn_position.y + position_index * 32)
 	enemy_instance.update_navigation()

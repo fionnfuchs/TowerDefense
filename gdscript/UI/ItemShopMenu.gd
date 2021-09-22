@@ -22,7 +22,7 @@ onready var item_3_buy_button = $Item3/BuyButton
 
 var item_1_id = 1
 var item_2_id = 0
-var item_3_id = 4
+var item_3_id = 0
 
 func _ready():
 	cancel_button.connect("button_up", self, "cancel")
@@ -109,14 +109,20 @@ func buy_item_3():
 
 func on_wave_beaten(wave_number):
 	if wave_number > 5:
-		if wave_number % 3 == 0:
+		if wave_number % 6 == 0:
+			reroll_item_1()
 			reroll_item_2()
+			Entities.notification_panel.queue_notification("New items available at the item shop!")
 
 func update_exclamation_symbol():
 	if can_buy_item():
 		Entities.item_shop.exclamation_symbol.visible = true
 	else:
 		Entities.item_shop.exclamation_symbol.visible = false
+
+func reroll_item_1():
+	item_1_id = rand_range(1,5)
+	update_exclamation_symbol()
 
 func reroll_item_2():
 	item_2_id = rand_range(1,5)
