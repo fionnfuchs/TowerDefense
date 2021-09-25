@@ -1,7 +1,7 @@
 extends Node2D
 
-export(int) var movement_speed = 500
-export(int) var damage = 1
+var movement_speed = 250
+var damage = 1
 
 var target = null
 var active = false
@@ -17,7 +17,6 @@ func has_buff(buff):
 		return false
 
 func _ready():
-	
 	if has_buff("BOMB"):
 		self.movement_speed *= 0.5
 
@@ -31,7 +30,8 @@ func _process(delta):
 				self.position += direction.normalized() * movement_speed * delta * GameState.time_speed
 		else:
 			queue_free()
-	
+
+func update_sprite():
 	if has_buff("SLOWDOWN"):
 		self.get_node("Sprite").texture = Scenes.slowdown_bullet_texture
 	elif has_buff("BOMB"):

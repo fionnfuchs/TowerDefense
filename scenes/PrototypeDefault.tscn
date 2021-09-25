@@ -1,9 +1,9 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
-[ext_resource path="res://sprites/prototype/portal_shadow.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Path/SimplePath.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/prototype/prototype_entities.png" type="Texture" id=3]
-[ext_resource path="res://sprites/prototype/portal.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Buildings/Home.tscn" type="PackedScene" id=4]
 [ext_resource path="res://sprites/prototype/Tree.png" type="Texture" id=5]
 [ext_resource path="res://sprites/prototype/shadow_simple.png" type="Texture" id=6]
 [ext_resource path="res://scenes/Map/BackgroundGrid.tscn" type="PackedScene" id=7]
@@ -14,7 +14,6 @@
 [ext_resource path="res://gdscript/UI/BuildMenu.gd" type="Script" id=12]
 [ext_resource path="res://gdscript/WaveSpawner.gd" type="Script" id=13]
 [ext_resource path="res://gdscript/UI/DifficultyPanel.gd" type="Script" id=14]
-[ext_resource path="res://gdscript/Home.gd" type="Script" id=15]
 [ext_resource path="res://gdscript/UI/InteractionLabel.gd" type="Script" id=16]
 [ext_resource path="res://sprites/prototype/tower_placeholder.png" type="Texture" id=17]
 [ext_resource path="res://sprites/prototype/pixel.png" type="Texture" id=18]
@@ -25,7 +24,6 @@
 [ext_resource path="res://sprites/prototype/path_straight.png" type="Texture" id=23]
 [ext_resource path="res://scenes/Resources/Tree.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sounds/coin_pickup.wav" type="AudioStream" id=25]
-[ext_resource path="res://tilesets/path.tres" type="TileSet" id=26]
 [ext_resource path="res://scenes/DruidMenu.gd" type="Script" id=27]
 [ext_resource path="res://sprites/prototype/tool_select_1.png" type="Texture" id=28]
 [ext_resource path="res://gdscript/UI/InteractionModeIndicator.gd" type="Script" id=29]
@@ -41,10 +39,10 @@
 [ext_resource path="res://scenes/MapObjectHandler.gd" type="Script" id=39]
 [ext_resource path="res://gdscript/UI/FastForward.gd" type="Script" id=40]
 [ext_resource path="res://sprites/prototype/ui/fast_forward.png" type="Texture" id=41]
-[ext_resource path="res://gdscript/MapObjects/PathTiles.gd" type="Script" id=42]
 [ext_resource path="res://gdscript/UI/NotificationPanel.gd" type="Script" id=43]
 [ext_resource path="res://sprites/prototype/exclamation_symbol.png" type="Texture" id=44]
 [ext_resource path="res://gdscript/UI/LostPanel.gd" type="Script" id=45]
+[ext_resource path="res://sprites/prototype/ui/f_button.png" type="Texture" id=46]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -108,12 +106,7 @@ tracks/1/keys = {
 "values": [ 0.0, 7.0, -7.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 23.8362, 4.79984 )
-
-[sub_resource type="RectangleShape2D" id=6]
-
-[sub_resource type="CapsuleShape2D" id=7]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 7.46074
 height = 15.0362
 
@@ -214,43 +207,7 @@ position = Vector2( -152, 40 )
 [node name="Stone4" parent="Entities" instance=ExtResource( 22 )]
 position = Vector2( -88, 24 )
 
-[node name="Home" type="StaticBody2D" parent="Entities"]
-position = Vector2( 8, -32 )
-script = ExtResource( 15 )
-
-[node name="Sprite" type="Sprite" parent="Entities/Home"]
-texture = ExtResource( 4 )
-
-[node name="Shadow" type="Sprite" parent="Entities/Home"]
-modulate = Color( 1, 1, 1, 0.313726 )
-position = Vector2( 0, 14.8867 )
-z_index = -2
-texture = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Home"]
-position = Vector2( 0, 10.4284 )
-shape = SubResource( 5 )
-
-[node name="Interactable" type="Node2D" parent="Entities/Home"]
-
-[node name="EnemyHitArea" type="Area2D" parent="Entities/Home"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Home/EnemyHitArea"]
-position = Vector2( 0, 10.387 )
-shape = SubResource( 6 )
-
-[node name="HealthBarBackground" type="Sprite" parent="Entities/Home"]
-visible = false
-self_modulate = Color( 0.129412, 0.129412, 0.129412, 1 )
-position = Vector2( 0, -16 )
-scale = Vector2( 1, 0.2 )
-z_index = -1
-texture = ExtResource( 18 )
-
-[node name="HealthBar" type="Sprite" parent="Entities/Home/HealthBarBackground"]
-self_modulate = Color( 0.164706, 0.290196, 0.862745, 1 )
-z_index = 1
-texture = ExtResource( 18 )
+[node name="Home" parent="Entities" instance=ExtResource( 4 )]
 
 [node name="WaveSpawner" type="Node2D" parent="Entities"]
 position = Vector2( 88, 312 )
@@ -277,7 +234,7 @@ script = ExtResource( 35 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/ItemShop"]
 rotation = 1.5708
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="Entities/ItemShop"]
 texture = ExtResource( 36 )
@@ -299,7 +256,6 @@ script = ExtResource( 39 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PrototypeResourcePanel" type="Control" parent="CanvasLayer"]
-visible = false
 self_modulate = Color( 1, 1, 1, 0.490196 )
 margin_right = 200.0
 margin_bottom = 200.0
@@ -309,6 +265,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="CanvasLayer/PrototypeResourcePanel"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
 margin_right = 128.0
 margin_bottom = 128.0
 __meta__ = {
@@ -362,6 +319,7 @@ __meta__ = {
 }
 
 [node name="DifficultyPanel" type="Panel" parent="CanvasLayer"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -200.0
@@ -395,6 +353,7 @@ __meta__ = {
 }
 
 [node name="PrototypeBuildMenu" type="Control" parent="CanvasLayer"]
+visible = false
 anchor_left = 0.37
 anchor_top = 0.7
 anchor_right = 0.63
@@ -539,6 +498,18 @@ script = ExtResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="FButtonTexture" type="TextureRect" parent="CanvasLayer/InteractionLabel"]
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.9
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+texture = ExtResource( 46 )
+stretch_mode = 6
 
 [node name="InteractionModeIndicator" type="Control" parent="CanvasLayer"]
 anchor_top = 0.8
@@ -1088,6 +1059,7 @@ __meta__ = {
 wait_time = 2.5
 
 [node name="LostPanel" type="Panel" parent="CanvasLayer"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -1161,16 +1133,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PathNavigation2D" type="Navigation2D" parent="."]
-
-[node name="PathTiles" type="TileMap" parent="PathNavigation2D"]
-position = Vector2( 0, 2 )
-z_index = -4
-tile_set = ExtResource( 26 )
-cell_size = Vector2( 16, 16 )
-format = 1
-tile_data = PoolIntArray( -65536, 0, 2, 0, 0, 0, 131071, 0, 65537, 65536, 0, 131072, 196607, 0, 0, 131072, 2, 0, 262143, 0, 0, 196608, 2, 0, 327679, 0, 0, 393215, 0, 0, 458751, 0, 65536, 393216, 0, 131073, 524287, 2, 0, 458752, 0, 0, 589823, 2, 0, 524288, 0, 0, 589824, 0, 0, 655360, 0, 196611, 655361, 0, 1, 655362, 0, 1, 655363, 0, 1, 655364, 0, 1, 655365, 0, 131073, 720896, 0, 0, 720901, 0, 0, 786432, 0, 0, 786437, 0, 0, 851968, 0, 0, 851973, 0, 0, 983036, 0, 65537, 983037, 0, 1, 983038, 0, 1, 983039, 0, 1, 917504, 0, 131072, 917509, 0, 0, 1048572, 0, 0, 983040, 2, 0, 983041, 2, 0, 983042, 2, 0, 983043, 2, 0, 983044, 2, 0, 983045, 0, 0, 1114108, 0, 0, 1048581, 0, 0, 1179644, 0, 0, 1114117, 0, 0, 1245180, 0, 0, 1179653, 0, 0, 1310716, 0, 0, 1245189, 0, 0, 1376252, 0, 0, 1310725, 0, 0, 1441788, 0, 0, 1441789, 2, 0, 1441790, 2, 0, 1441791, 2, 131073, 1376261, 0, 0, 1507324, 0, 0, 1507325, 2, 0, 1507327, 2, 0, 1441797, 0, 0, 1572860, 0, 0, 1572861, 2, 0, 1572862, 2, 0, 1572863, 2, 131072, 1507333, 0, 0, 1638396, 0, 0, 1572869, 0, 0, 1703932, 0, 0, 1638405, 0, 0, 1769468, 0, 0, 1703941, 0, 0, 1835004, 0, 0, 1769477, 0, 0, 1900540, 0, 65538, 1835013, 0, 65538 )
-script = ExtResource( 42 )
+[node name="PathNavigation2D" parent="." instance=ExtResource( 2 )]
 
 [node name="GlobalSounds" type="Node2D" parent="."]
 script = ExtResource( 30 )

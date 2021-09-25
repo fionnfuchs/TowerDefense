@@ -1,12 +1,8 @@
 extends Label
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var f_button_texture = $FButtonTexture
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	Signals.connect("interaction_target_changed", self, "interaction_target_changed")
 
@@ -24,4 +20,8 @@ func _process(delta):
 		self.visible = false
 	else:
 		self.visible = true
-		
+	
+	if self.text != "":
+		f_button_texture.visible = true
+	else:
+		f_button_texture.visible = false

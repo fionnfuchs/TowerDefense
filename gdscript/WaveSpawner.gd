@@ -25,6 +25,7 @@ func _ready():
 
 func spawn_wave():
 	print("INFO: Spawning wave " + str(Difficulty.current_wave) + " with wave type " + str(current_wave_type))
+	Signals.emit_signal("wave_started")
 	var position_index = 0
 	
 	for i in range(round(1 + (Difficulty.current_wave - 1) * 1.3)):

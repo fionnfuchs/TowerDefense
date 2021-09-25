@@ -14,7 +14,10 @@ func _ready():
 	play_button.connect("button_up", self, "start_demo")
 
 func _process(delta):
-	highscore_label.text = "Highscore: " + str(Persistence.highscore) + " waves survived"
+	if Persistence.highscore > 0:
+		highscore_label.text = "Highscore: " + str(Persistence.highscore) + " waves survived"
+	else:
+		highscore_label.text = "No highscore has been set yet"
 
 func start_demo():
 	get_tree().change_scene("res://scenes/PrototypeDefault.tscn")

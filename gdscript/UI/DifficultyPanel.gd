@@ -12,5 +12,5 @@ func _process(delta):
 	difficulty_label.text = "Difficulty: " + str(round(Difficulty.difficulty * 10) / 10)
 	if GameState.game_state == 0 or GameState.game_state == 2:
 		wave_text.text = "Wave " + str(Difficulty.current_wave) + " waiting"
-	if GameState.game_state == 1:
+	elif GameState.game_state == 1:
 		wave_text.text = "Wave " + str(Difficulty.current_wave-1) + " incoming"

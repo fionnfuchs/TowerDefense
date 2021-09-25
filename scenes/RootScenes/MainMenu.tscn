@@ -1,9 +1,28 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://uitheme/PixeledDynamicFontNoOutline.tres" type="DynamicFont" id=1]
 [ext_resource path="res://uitheme/PixeledDynamicFontH1.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/Map/BackgroundGrid.tscn" type="PackedScene" id=3]
 [ext_resource path="res://gdscript/UI/MainMenuPanel.gd" type="Script" id=4]
+[ext_resource path="res://scenes/Path/SimplePath.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Buildings/Home.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "LogoAnimation"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.5, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
 
 [node name="MainMenu" type="Node2D"]
 
@@ -13,6 +32,7 @@ position = Vector2( 516.985, 243.826 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MainMenuPanel" type="Panel" parent="CanvasLayer"]
+self_modulate = Color( 1, 1, 1, 0.152941 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -59,8 +79,12 @@ anchor_top = 0.1
 anchor_right = 0.5
 anchor_bottom = 0.2
 margin_left = -400.0
+margin_top = -17.1129
 margin_right = 400.0
-margin_bottom = 50.0
+margin_bottom = 32.8871
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 399.93, -0.356079 )
 custom_fonts/font = ExtResource( 2 )
 text = "Tower Defense"
 align = 1
@@ -68,3 +92,13 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/TowerDefenseH"]
+autoplay = "LogoAnimation"
+anims/LogoAnimation = SubResource( 1 )
+
+[node name="PathNavigation2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 500, 200 )
+
+[node name="Home" parent="." instance=ExtResource( 6 )]
+position = Vector2( 508, 164 )

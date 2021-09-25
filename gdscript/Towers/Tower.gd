@@ -13,12 +13,13 @@ var shoot_timer = 0
 
 var equipped_item = 0
 
-export(float) var shooting_time = 2
-export(float) var attention_radius = 45
 
-export(String) var bullet_buffs = []
-export(String) var target_choice = "FOCUS"
-export(int) var bullet_damage = 1
+var attention_radius = 45
+var target_choice = "FOCUS"
+var shooting_time = 0.7
+var bullet_buffs = []
+var bullet_damage = 1
+
 
 
 var grid_vector = Vector2()
@@ -31,6 +32,13 @@ func _ready():
 	attention_area.connect("body_exited", self, "body_exited_attention_area")
 	
 	GameState.active_towers += 1
+	update_equipped_item_icon()
+	
+	Signals.connect("wave_started", self, "on_wave_started")
+
+func on_wave_started():
+	update_equipped_item_icon()
+	update_tower_stats_by_item()
 
 func _process(delta):
 	shoot_timer += delta
@@ -39,15 +47,18 @@ func _process(delta):
 			shoot()
 		shoot_timer = 0
 	
+func update_equipped_item_icon():
 	if equipped_item > 0:
 		item_sprite.visible = true
 	else:
 		item_sprite.visible = false
 	
 func equip_item(item_id):
+	print("Equipping item: " + str(item_id))
 	self.equipped_item = item_id
 	item_sprite.texture = Items.get_item_icon(item_id)
 	update_tower_stats_by_item()
+	update_equipped_item_icon()
 
 func update_grid():
 	var new_grid_vector = Grid.get_grid_position(position)
@@ -67,7 +78,6 @@ func body_exited_attention_area(body):
 func shoot():
 	shoot_sound.play()
 	var bullet_instance = Scenes.basic_bullet.instance()
-	parent.add_child(bullet_instance)
 	bullet_instance.position = self.position
 	if target_choice == "FOCUS":
 		bullet_instance.target = enemies_in_range[0]
@@ -79,9 +89,11 @@ func shoot():
 			if !enemy.has_buff(bullet_buffs[0]):
 				bullet_instance.target = enemy
 				break
-	bullet_instance.active = true
 	bullet_instance.damage = self.bullet_damage
-	bullet_instance.buffs = bullet_buffs
+	bullet_instance.buffs = [] + self.bullet_buffs
+	bullet_instance.active = true
+	parent.add_child(bullet_instance)
+
 
 func interact():
 	if Entities.player.carried_item != 0:
@@ -91,7 +103,6 @@ func interact():
 func play_build_sound():
 	build_sound.play()
 	
-
 func get_info_text():
 	if Entities.player.carried_item != 0:
 		return "Hold F to upgrade this tower with your item"
@@ -102,18 +113,22 @@ func update_tower_stats_by_item():
 	if equipped_item == 1: #SLOWDOWN
 		bullet_buffs = ["SLOWDOWN"]
 		target_choice = "BUFF_BASED"
-		bullet_damage = 0.5
-		shooting_time = 1.0
-	if equipped_item == 2: #DOUBLE DAMAGE
+		bullet_damage = 1
+		shooting_time = 0.8
+		print("Tower updated by item: Slowdown")
+	elif equipped_item == 2: #DOUBLE DAMAGE
 		bullet_damage = 2
-	if equipped_item == 3: #BOMBS
+		print("Tower updated by item: Double Damage")
+	elif equipped_item == 3: #BOMBS
 		bullet_damage = 1
 		bullet_buffs = ["BOMB"]
 		target_choice = "RANDOM"
-	if equipped_item == 4:
+		print("Tower updated by item: Bomb")
+	elif equipped_item == 4:
 		bullet_damage = 0.5
 		shooting_time = 0.15
-	if equipped_item == 5:
+		print("Tower updated by item: Machine Gun")
+	elif equipped_item == 5:
 		attention_radius = 75
 		update_attention_radius()
 

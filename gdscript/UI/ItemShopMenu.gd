@@ -24,7 +24,10 @@ var item_1_id = 1
 var item_2_id = 0
 var item_3_id = 0
 
+var rng = RandomNumberGenerator.new()
+
 func _ready():
+	rng.randomize()
 	cancel_button.connect("button_up", self, "cancel")
 	
 	item_1_buy_button.connect("button_up", self, "buy_item_1")
@@ -87,6 +90,7 @@ func buy_item_1():
 	if Resources.resources["gold"] >= Items.get_item_base_price(item_1_id) + 10 * GameState.items_bought:
 		Resources.resources["gold"] -= Items.get_item_base_price(item_1_id) + 10 * GameState.items_bought
 		Entities.player.set_carried_item(item_1_id)
+		print("Bought item: " + str(item_1_id))
 		GameState.items_bought += 1
 		item_1_id = 0
 		update_exclamation_symbol()
@@ -96,6 +100,7 @@ func buy_item_2():
 		Resources.resources["gold"] -= Items.get_item_base_price(item_2_id) + 10 * GameState.items_bought
 		Entities.player.set_carried_item(item_2_id)
 		GameState.items_bought += 1
+		print("Bought item: " + str(item_2_id))
 		item_2_id = 0
 		update_exclamation_symbol()
 
@@ -104,6 +109,7 @@ func buy_item_3():
 		Resources.resources["gold"] -= Items.get_item_base_price(item_3_id) + 10 * GameState.items_bought
 		Entities.player.set_carried_item(item_3_id)
 		GameState.items_bought += 1
+		print("Bought item: " + str(item_3_id))
 		item_3_id = 0
 		update_exclamation_symbol()
 
@@ -121,11 +127,11 @@ func update_exclamation_symbol():
 		Entities.item_shop.exclamation_symbol.visible = false
 
 func reroll_item_1():
-	item_1_id = rand_range(1,5)
+	item_1_id = rng.randi_range(1,5)
 	update_exclamation_symbol()
 
 func reroll_item_2():
-	item_2_id = rand_range(1,5)
+	item_2_id = rng.randi_range(1,5)
 	update_exclamation_symbol()
 
 func can_buy_item():

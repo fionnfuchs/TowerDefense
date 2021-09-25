@@ -19,7 +19,7 @@ position = Vector2( -0.744751, 0.744751 )
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 2 )
-shooting_time = 0.7
+shooting_time = 0.5
 bullet_damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

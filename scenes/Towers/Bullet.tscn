@@ -5,6 +5,7 @@
 
 [node name="Bullet" type="Node2D"]
 script = ExtResource( 1 )
+movement_speed = 250
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
