@@ -22,7 +22,7 @@ onready var item_3_buy_button = $Item3/BuyButton
 
 var item_1_id = 1
 var item_2_id = 0
-var item_3_id = 0
+var item_3_id = 2
 
 var rng = RandomNumberGenerator.new()
 

@@ -26,9 +26,9 @@ func position_changed():
 	Grid.set_grid_value_by_world_position(grid_position, 0)
 	Grid.set_grid_value_by_world_position(self.position, 2)
 
-func interact():
+func interact(noSound=false):
 	if current_amount > 0:
-		gather_sound.play()
+		if not noSound: gather_sound.play()
 		Resources.resources[resource_name] += 1 * GlobalEffects.get_total_resource_gathering_multiplier()
 		current_amount -= 1
 

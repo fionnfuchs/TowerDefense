@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Path/SimplePath.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://gdscript/UI/BuildMenu.gd" type="Script" id=12]
 [ext_resource path="res://gdscript/WaveSpawner.gd" type="Script" id=13]
 [ext_resource path="res://gdscript/UI/DifficultyPanel.gd" type="Script" id=14]
+[ext_resource path="res://sprites/prototype/house_prototype.png" type="Texture" id=15]
 [ext_resource path="res://gdscript/UI/InteractionLabel.gd" type="Script" id=16]
 [ext_resource path="res://sprites/prototype/tower_placeholder.png" type="Texture" id=17]
 [ext_resource path="res://sprites/prototype/pixel.png" type="Texture" id=18]
@@ -131,6 +132,7 @@ shape = SubResource( 1 )
 [node name="Camera2D" type="Camera2D" parent="Entities/Player"]
 current = true
 zoom = Vector2( 0.5, 0.5 )
+process_mode = 0
 smoothing_enabled = true
 smoothing_speed = 15.0
 
@@ -353,10 +355,9 @@ __meta__ = {
 }
 
 [node name="PrototypeBuildMenu" type="Control" parent="CanvasLayer"]
-visible = false
-anchor_left = 0.37
+anchor_left = 0.27
 anchor_top = 0.7
-anchor_right = 0.63
+anchor_right = 0.73
 anchor_bottom = 1.0
 script = ExtResource( 12 )
 __meta__ = {
@@ -391,9 +392,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -100.0
+margin_left = -209.09
 margin_top = -60.0
-margin_right = 100.0
+margin_right = -9.09032
 margin_bottom = 70.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -481,6 +482,88 @@ stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="House" type="Panel" parent="CanvasLayer/PrototypeBuildMenu"]
+self_modulate = Color( 0.701961, 0.701961, 0.701961, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 8.49635
+margin_top = -60.0
+margin_right = 208.496
+margin_bottom = 70.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CanvasLayer/PrototypeBuildMenu/House"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -60.0
+margin_top = 117.589
+margin_right = 60.0
+margin_bottom = 137.589
+custom_fonts/font = ExtResource( 19 )
+text = "Build"
+
+[node name="HouseIcon" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/House"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -15.0
+margin_top = 16.0
+margin_right = 15.0
+margin_bottom = 72.0
+texture = ExtResource( 15 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="CanvasLayer/PrototypeBuildMenu/House"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -60.0
+margin_top = 6.1427
+margin_right = 60.0
+margin_bottom = 20.1427
+custom_fonts/font = ExtResource( 19 )
+text = "House"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoldIcon" type="TextureRect" parent="CanvasLayer/PrototypeBuildMenu/House"]
+margin_left = 62.8895
+margin_top = 72.7256
+margin_right = 92.8895
+margin_bottom = 102.726
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GoldLabel" type="Label" parent="CanvasLayer/PrototypeBuildMenu/House"]
+margin_left = 93.2823
+margin_top = 81.7711
+margin_right = 133.282
+margin_bottom = 97.7711
+custom_fonts/font = ExtResource( 19 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HelpButton" type="Button" parent="CanvasLayer/PrototypeBuildMenu/House"]
+margin_left = 179.805
+margin_right = 199.805
+margin_bottom = 22.0
+custom_fonts/font = ExtResource( 19 )
+text = "?"
 
 [node name="InteractionLabel" type="Label" parent="CanvasLayer"]
 anchor_left = 0.5

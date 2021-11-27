@@ -37,13 +37,15 @@ func die():
 	Entities.wave_spawner.check_state_condition()
 	queue_free()
 
-func _process(delta):
+func _physics_process(delta):
 	if GameState.game_state == 1:
-		process_movement(delta)
+		process_movement()
+
+func _process(delta):
 	healthbar.scale.x = float(hp) / max_hp
 	healthbar.position.x = (1 - float(hp) / max_hp) * -8
 
-func process_movement(delta):
+func process_movement():
 	line2d.global_position = Vector2.ZERO
 	if path and len(path) > 0:
 		line2d.points = path
@@ -55,16 +57,16 @@ func process_movement(delta):
 		var direction = path[0] - position
 		direction = direction.normalized()
 		if not "SLOWDOWN" in buffs:
-			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta * GameState.time_speed)
+			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * GameState.time_speed / 50)
 		else:
-			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta / 1.6 * GameState.time_speed)
+			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() / 1.6 * GameState.time_speed / 50)
 	
 	if !path or len(path) == 0:
 		var direction = target - position
 		if not "SLOWDOWN" in buffs:
-			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta * GameState.time_speed)
+			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * GameState.time_speed / 50)
 		else:
-			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * delta / 1.6 * GameState.time_speed)
+			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() / 1.6 * GameState.time_speed / 50)
 
 func get_hit(damage):
 	hitsound.play()

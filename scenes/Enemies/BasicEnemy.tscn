@@ -29,8 +29,8 @@ tracks/0/keys = {
 position = Vector2( 8, 127.097 )
 collision_mask = 2
 script = ExtResource( 2 )
-movement_speed = 1600
-max_hp = 5
+movement_speed = 1400
+max_hp = 4
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -0.166389, 7.85255 )

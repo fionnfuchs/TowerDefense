@@ -16,6 +16,12 @@ var game_state_before = 0
 
 func _ready():
 	understood_button.connect("button_up", self, "understood")
+	
+	Entities.tutorial_menu = self
+	
+	for i in range(1000):
+		tutorial_messages.append("")
+	tutorial_messages[901] = "A house collects all resources in its radius everytime a wave is beaten."
 
 func _process(delta):
 	process_tutorial(delta)
@@ -43,6 +49,8 @@ func process_tutorial(delta):
 	if tutorial_state == 4:
 		if GameState.game_state == 1:
 			show_current_tutorial_message()
+	if tutorial_state == 901:
+		show_current_tutorial_message()
 
 func show_current_tutorial_message():
 	GameState.interaction_mode = 0
@@ -57,4 +65,6 @@ func understood():
 	if GameState.game_state == 4:
 		GameState.set_game_state(game_state_before)
 		tutorial_state += 1
+		if tutorial_state > 900:
+			tutorial_state = 900
 	

@@ -56,11 +56,12 @@ func chance(chance):
 		return false
 
 func check_state_condition():
-	if len(Entities.enemies) <= 0:
+	if len(Entities.enemies) <= 0 and GameState.game_state == 1:
 		# Wave is beaten
 		Signals.emit_signal("wave_beaten", Difficulty.current_wave)
 		GameState.set_game_state(0)
 		print("INFO: Wave beaten.")
+		Signals.emit_signal("after_wave_beaten")
 
 func spawn_enemy(position_index, enemy_scene):
 	var spawn_position = position

@@ -16,9 +16,9 @@ var equipped_item = 0
 
 var attention_radius = 45
 var target_choice = "FOCUS"
-var shooting_time = 0.7
+var shooting_time = 0.6
 var bullet_buffs = []
-var bullet_damage = 1
+var bullet_damage = 1.5
 
 
 
@@ -114,10 +114,10 @@ func update_tower_stats_by_item():
 		bullet_buffs = ["SLOWDOWN"]
 		target_choice = "BUFF_BASED"
 		bullet_damage = 1
-		shooting_time = 0.8
+		shooting_time = 0.7
 		print("Tower updated by item: Slowdown")
 	elif equipped_item == 2: #DOUBLE DAMAGE
-		bullet_damage = 2
+		bullet_damage = 3
 		print("Tower updated by item: Double Damage")
 	elif equipped_item == 3: #BOMBS
 		bullet_damage = 1

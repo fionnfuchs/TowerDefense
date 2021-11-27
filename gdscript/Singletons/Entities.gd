@@ -7,6 +7,7 @@ var item_shop = null
 var path_tiles = null
 var build_menu = null
 var notification_panel = null
+var tutorial_menu = null
 
 func reset():
 	wave_spawner = null
@@ -16,3 +17,4 @@ func reset():
 	path_tiles = null
 	build_menu = null
 	notification_panel = null
+	tutorial_menu = null

@@ -33,10 +33,13 @@ func _ready():
 	
 	graphics_sprite.scale.x = -1
 
+func _physics_process(delta):
+	if GameState.game_state < 2:
+		process_movement()
+
 func _process(delta):
 	process_interaction(delta)
 	if GameState.game_state < 2:
-		process_movement(delta)
 		if GameState.game_state == 0:
 			process_input(delta)
 			process_interactables()
@@ -58,7 +61,7 @@ func set_carried_item(item_id):
 	carried_item = item_id
 	carried_item_sprite.texture = Items.get_item_icon(item_id)
 
-func process_movement(delta):
+func process_movement():
 	var move_direction = Vector2(0,0)
 
 	if Input.is_action_pressed("ui_up"):
@@ -81,7 +84,7 @@ func process_movement(delta):
 	else:
 		animation_player.current_animation = "Idle"
 	
-	self.move_and_slide(move_direction.normalized() * movement_speed * delta * 100)
+	self.move_and_slide(move_direction.normalized() * movement_speed * 2)
 	
 func process_input(delta):
 	if Input.is_action_just_pressed("toggle_build_mode"):
@@ -157,8 +160,11 @@ func body_exited_interaction_radius(body):
 func build(building):
 	var grid_vector = Grid.get_grid_position(position)
 	if Grid.get_grid_value(grid_vector) == 0 and Entities.path_tiles.is_free_position(position.x, position.y):
-		Resources.resources["wood"] -= Entities.build_menu.current_tower_price["wood"]
-		Resources.resources["stone"] -= Entities.build_menu.current_tower_price["stone"]
+		if building == Entities.build_menu.simple_tower:
+			Resources.resources["wood"] -= Entities.build_menu.current_tower_price["wood"]
+			Resources.resources["stone"] -= Entities.build_menu.current_tower_price["stone"]
+		elif building == Entities.build_menu.house:
+			Resources.resources["gold"] -= Entities.build_menu.current_house_price["gold"]
 		
 		var building_instance = building.instance()
 		parent.add_child(building_instance)
@@ -166,5 +172,5 @@ func build(building):
 		building_instance.update_grid()
 		building_instance.play_build_sound()
 	else:
-		print("Place already taken...")
+		print("Place already taken..." + str(Grid.get_grid_value(grid_vector)) + " " + str(Entities.path_tiles.is_free_position(position.x, position.y)))
 	
