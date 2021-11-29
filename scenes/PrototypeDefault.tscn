@@ -355,6 +355,7 @@ __meta__ = {
 }
 
 [node name="PrototypeBuildMenu" type="Control" parent="CanvasLayer"]
+visible = false
 anchor_left = 0.27
 anchor_top = 0.7
 anchor_right = 0.73
@@ -521,12 +522,12 @@ stretch_mode = 6
 [node name="Label" type="Label" parent="CanvasLayer/PrototypeBuildMenu/House"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -60.0
+margin_left = -80.0
 margin_top = 6.1427
-margin_right = 60.0
+margin_right = 80.0
 margin_bottom = 20.1427
 custom_fonts/font = ExtResource( 19 )
-text = "House"
+text = "Resource Gatherer"
 align = 1
 valign = 1
 __meta__ = {
@@ -1229,3 +1230,4 @@ stream = ExtResource( 31 )
 
 [node name="Explosion" type="AudioStreamPlayer2D" parent="GlobalSounds"]
 stream = ExtResource( 32 )
+volume_db = -12.0

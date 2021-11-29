@@ -38,6 +38,10 @@ Persistence="*res://gdscript/Singletons/Persistence.gd"
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
+[gui]
+
+theme/custom="res://uitheme/DefaultTheme.tres"
+
 [input]
 
 ui_left={
