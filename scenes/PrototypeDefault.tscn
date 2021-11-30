@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Path/SimplePath.tscn" type="PackedScene" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://sprites/prototype/path_straight.png" type="Texture" id=23]
 [ext_resource path="res://scenes/Resources/Tree.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sounds/coin_pickup.wav" type="AudioStream" id=25]
+[ext_resource path="res://sprites/prototype/Crystal.png" type="Texture" id=26]
 [ext_resource path="res://scenes/DruidMenu.gd" type="Script" id=27]
 [ext_resource path="res://sprites/prototype/tool_select_1.png" type="Texture" id=28]
 [ext_resource path="res://gdscript/UI/InteractionModeIndicator.gd" type="Script" id=29]
@@ -270,6 +271,7 @@ __meta__ = {
 self_modulate = Color( 1, 1, 1, 0.392157 )
 margin_right = 128.0
 margin_bottom = 128.0
+rect_scale = Vector2( 0.98311, 1.27341 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -310,11 +312,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="crystal_icon" type="TextureRect" parent="CanvasLayer/PrototypeResourcePanel"]
+margin_left = 16.0887
+margin_top = 125.054
+margin_right = 36.0887
+margin_bottom = 145.054
+texture = ExtResource( 26 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label" type="Label" parent="CanvasLayer/PrototypeResourcePanel"]
 margin_left = 43.0126
 margin_top = 16.0
 margin_right = 118.012
-margin_bottom = 116.0
+margin_bottom = 146.0
 custom_fonts/font = ExtResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false

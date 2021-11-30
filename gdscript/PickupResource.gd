@@ -16,4 +16,6 @@ func pick_up():
 	if resource_name == "gold":
 		Signals.emit_signal("play_global_sound", "CollectCoin")
 		Signals.emit_signal("gold_updated")
-		queue_free()
+	if resource_name == "crystal":
+		Signals.emit_signal("crystal_updated")
+	queue_free()

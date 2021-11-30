@@ -12,11 +12,14 @@ var tank_enemy_2 = preload("res://scenes/Enemies/TankEnemy2.tscn")
 var basic_bullet = preload("res://scenes/Towers/Bullet.tscn")
 
 var gold_pickup = preload("res://scenes/Resources/Gold.tscn")
+var crystal_pickup = preload("res://scenes/Resources/Crystal.tscn")
 
 var explosion = preload("res://scenes/Effects/Explosion.tscn")
 var simple_hit = preload("res://scenes/Effects/SimpleHit.tscn")
 
 var gold_chest = preload("res://scenes/MapObjects/GoldChest.tscn")
+
+
 
 
 #TEXTURES:

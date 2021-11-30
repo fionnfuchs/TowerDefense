@@ -80,5 +80,5 @@ func calculate_tower_prices():
 	
 func calculate_house_prices():
 	return {
-		"gold": 50,
+		"gold": 25,
 	}

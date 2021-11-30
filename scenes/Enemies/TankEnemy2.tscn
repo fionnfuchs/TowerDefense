@@ -31,6 +31,8 @@ collision_mask = 2
 script = ExtResource( 2 )
 movement_speed = 1500
 max_hp = 25
+gold_chance = 80
+crystal_chance = 30
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -0.0820808, 7.88445 )

@@ -5,6 +5,9 @@ export(int) var movement_speed = 1000
 
 export(int) var max_hp = 3
 
+export(int) var gold_chance = 50
+export(int) var crystal_chance = 0
+
 onready var hp = max_hp
 
 onready var healthbar = get_node("HealthBar")
@@ -28,11 +31,18 @@ func update_navigation():
 	
 
 func die():
-	var rand = rand_range(0,2)
-	if rand > 1:
+	randomize()
+	var gold_rand = rand_range(1,100)
+	if gold_rand < gold_chance:
 		var gold_pickup = Scenes.gold_pickup.instance()
 		self.get_parent().add_child(gold_pickup)
 		gold_pickup.position = self.position
+	var crystal_rand = rand_range(1,100)
+	if crystal_rand < crystal_chance:
+		var crystal_pickup = Scenes.crystal_pickup.instance()
+		self.get_parent().add_child(crystal_pickup)
+		crystal_pickup.position = self.position
+	
 	Entities.enemies.erase(self)
 	Entities.wave_spawner.check_state_condition()
 	queue_free()
