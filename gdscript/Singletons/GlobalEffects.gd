@@ -9,6 +9,7 @@ var enemy_health_multipliers = []
 var resource_gathering_multipliers = []
 var tower_damage_multipliers = []
 var tower_speed_multipliers = []
+var gold_drop_multipliers = []
 
 #NEGATIVE EFFECTS
 func get_total_enemy_speed_effect():
@@ -27,6 +28,12 @@ func get_total_enemy_health_multiplier():
 func get_total_resource_gathering_multiplier():
 	var total_multiplier = 1
 	for multiplier in resource_gathering_multipliers:
+		total_multiplier *= multiplier
+	return total_multiplier
+
+func get_total_gold_drop_multiplier():
+	var total_multiplier = 1
+	for multiplier in gold_drop_multipliers:
 		total_multiplier *= multiplier
 	return total_multiplier
 

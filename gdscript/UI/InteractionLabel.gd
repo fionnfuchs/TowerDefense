@@ -16,7 +16,7 @@ func interaction_target_changed(new_target):
 func _process(delta):
 	if Entities.player.interaction_target == null:
 		self.text = ""
-	if GameState.interaction_mode != 0:
+	if GameState.interaction_mode != 0 or GameState.game_state != 0:
 		self.visible = false
 	else:
 		self.visible = true

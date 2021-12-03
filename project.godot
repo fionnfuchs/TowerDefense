@@ -41,6 +41,7 @@ window/stretch/aspect="expand"
 [gui]
 
 theme/custom="res://uitheme/DefaultTheme.tres"
+theme/custom_font="res://uitheme/PixeledDynamicFontNoOutline.tres"
 
 [input]
 

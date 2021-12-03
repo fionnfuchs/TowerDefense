@@ -8,6 +8,7 @@ var path_tiles = null
 var build_menu = null
 var notification_panel = null
 var tutorial_menu = null
+var skill_druid = null
 
 func reset():
 	wave_spawner = null

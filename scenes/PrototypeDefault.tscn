@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Path/SimplePath.tscn" type="PackedScene" id=2]
@@ -41,10 +41,13 @@
 [ext_resource path="res://scenes/MapObjectHandler.gd" type="Script" id=39]
 [ext_resource path="res://gdscript/UI/FastForward.gd" type="Script" id=40]
 [ext_resource path="res://sprites/prototype/ui/fast_forward.png" type="Texture" id=41]
+[ext_resource path="res://gdscript/SkillDruid.gd" type="Script" id=42]
 [ext_resource path="res://gdscript/UI/NotificationPanel.gd" type="Script" id=43]
 [ext_resource path="res://sprites/prototype/exclamation_symbol.png" type="Texture" id=44]
 [ext_resource path="res://gdscript/UI/LostPanel.gd" type="Script" id=45]
 [ext_resource path="res://sprites/prototype/ui/f_button.png" type="Texture" id=46]
+[ext_resource path="res://sprites/prototype/druids.png" type="Texture" id=47]
+[ext_resource path="res://gdscript/UI/SkillMenu.gd" type="Script" id=48]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -111,6 +114,8 @@ tracks/1/keys = {
 [sub_resource type="CapsuleShape2D" id=5]
 radius = 7.46074
 height = 15.0362
+
+[sub_resource type="CircleShape2D" id=6]
 
 [node name="Node2D" type="Node2D"]
 
@@ -253,6 +258,25 @@ texture = ExtResource( 6 )
 
 [node name="MapObjectHandler" type="Node2D" parent="Entities"]
 script = ExtResource( 39 )
+
+[node name="SkillDruid" type="StaticBody2D" parent="Entities"]
+position = Vector2( -72, 152 )
+script = ExtResource( 42 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/SkillDruid"]
+shape = SubResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="Entities/SkillDruid"]
+texture = ExtResource( 47 )
+hframes = 3
+
+[node name="Interactable" type="Node" parent="Entities/SkillDruid"]
+
+[node name="Shadow" type="Sprite" parent="Entities/SkillDruid"]
+self_modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 0, 1.86699 )
+z_index = -1
+texture = ExtResource( 6 )
 
 [node name="BackgroundGrid" parent="." instance=ExtResource( 7 )]
 
@@ -1227,6 +1251,183 @@ margin_right = 150.0
 margin_bottom = 33.014
 custom_fonts/font = ExtResource( 19 )
 text = "New Highscore!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SkillMenu" type="Panel" parent="CanvasLayer"]
+self_modulate = Color( 1, 0.356863, 0.898039, 1 )
+anchor_left = 0.5
+anchor_top = 0.7
+anchor_right = 0.5
+anchor_bottom = 0.7
+margin_left = -300.0
+margin_top = -50.0
+margin_right = 300.0
+margin_bottom = 75.0
+script = ExtResource( 48 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CrystalIcon" type="TextureRect" parent="CanvasLayer/SkillMenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -15.0
+margin_top = 10.0
+margin_right = 15.0
+margin_bottom = 40.0
+texture = ExtResource( 26 )
+expand = true
+stretch_mode = 5
+
+[node name="CrystalLabel" type="Label" parent="CanvasLayer/SkillMenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 15.0
+margin_top = 10.0
+margin_right = 100.0
+margin_bottom = 40.0
+text = "0"
+valign = 1
+
+[node name="CostLabel" type="Label" parent="CanvasLayer/SkillMenu"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -100.0
+margin_top = 10.0
+margin_right = -20.0
+margin_bottom = 40.0
+text = "Cost : "
+align = 2
+valign = 1
+
+[node name="DamageButton" type="Button" parent="CanvasLayer/SkillMenu"]
+self_modulate = Color( 1, 0.788235, 0.835294, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -60.0
+margin_top = -13.6651
+margin_right = 60.0
+margin_bottom = 46.3349
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/SkillMenu/DamageButton"]
+self_modulate = Color( 1, 0.321569, 0.466667, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.63699
+margin_top = 5.0
+margin_right = -5.36301
+margin_bottom = -5.0
+text = "+
+Tower Damage"
+align = 1
+valign = 1
+
+[node name="Multiplier" type="Label" parent="CanvasLayer/SkillMenu/DamageButton"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+anchor_right = 1.0
+margin_top = -6.38589
+margin_bottom = 9.61411
+text = "1.0x"
+align = 1
+
+[node name="SpeedButton" type="Button" parent="CanvasLayer/SkillMenu"]
+self_modulate = Color( 1, 0.788235, 0.835294, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 88.829
+margin_top = -13.6651
+margin_right = 208.829
+margin_bottom = 46.3349
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Multiplier" type="Label" parent="CanvasLayer/SkillMenu/SpeedButton"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+anchor_right = 1.0
+margin_top = -6.38589
+margin_bottom = 9.61411
+text = "1.0x"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/SkillMenu/SpeedButton"]
+self_modulate = Color( 1, 0.321569, 0.466667, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.63699
+margin_top = 5.0
+margin_right = -5.36301
+margin_bottom = -5.0
+text = "+
+Tower Speed"
+align = 1
+valign = 1
+
+[node name="GoldButton" type="Button" parent="CanvasLayer/SkillMenu"]
+self_modulate = Color( 1, 0.788235, 0.835294, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -210.433
+margin_top = -13.6651
+margin_right = -90.4327
+margin_bottom = 46.3349
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Multiplier" type="Label" parent="CanvasLayer/SkillMenu/GoldButton"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+anchor_right = 1.0
+margin_top = -6.0
+margin_bottom = 9.61411
+text = "1.0x"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/SkillMenu/GoldButton"]
+self_modulate = Color( 1, 0.321569, 0.466667, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.63699
+margin_top = 5.0
+margin_right = -5.36301
+margin_bottom = -5.0
+text = "+
+Gold Drops"
+align = 1
+valign = 1
+
+[node name="CancelButton" type="Button" parent="CanvasLayer/SkillMenu"]
+self_modulate = Color( 1, 0.541176, 0.541176, 1 )
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -60.0
+margin_top = -7.88434
+margin_right = 60.0
+margin_bottom = 12.1157
+text = "Cancel"
 __meta__ = {
 "_edit_use_anchors_": false
 }

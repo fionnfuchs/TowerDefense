@@ -1,6 +1,6 @@
 extends Node
 
-var game_state = 0 # 0 = Player Visible Walking State, 1 = Wave incoming, 2 = Druid Menu, 3 = Item Shop, 9999 = Lost
+var game_state = 0 # 0 = Player Visible Walking State, 1 = Wave incoming, 2 = Druid Menu, 3 = Item Shop, 4 = Tutorial, 5 = Skill Menu, 9999 = Lost
 var interaction_mode = 0
 
 var active_towers = 0
