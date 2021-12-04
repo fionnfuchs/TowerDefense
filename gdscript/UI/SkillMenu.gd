@@ -23,23 +23,23 @@ func _process(delta):
 	gold_multiplier_label.text = str(round(GlobalEffects.get_total_gold_drop_multiplier()*100)/100) + "x"
 
 func get_skill_price():
-	return len(GlobalEffects.tower_damage_multipliers) + len(GlobalEffects.tower_speed_multipliers) + len(GlobalEffects.gold_drop_multipliers)
+	return 1 + len(GlobalEffects.tower_damage_multipliers) + len(GlobalEffects.tower_speed_multipliers) + len(GlobalEffects.gold_drop_multipliers)
 
 func cancel():
 	GameState.set_game_state(0)
 
 func damage_button_pressed():
-	if Resources.resources["crystal"] > get_skill_price():
+	if Resources.resources["crystal"] >= get_skill_price():
 		Resources.resources["crystal"] -= get_skill_price()
 		GlobalEffects.tower_damage_multipliers.append(1.05)
 		
 
 func speed_button_pressed():
-	if Resources.resources["crystal"] > get_skill_price():
+	if Resources.resources["crystal"] >= get_skill_price():
 		Resources.resources["crystal"] -= get_skill_price()
 		GlobalEffects.tower_speed_multipliers.append(1.05)
 
 func gold_button_pressed():
-	if Resources.resources["crystal"] > get_skill_price():
+	if Resources.resources["crystal"] >= get_skill_price():
 		Resources.resources["crystal"] -= get_skill_price()
 		GlobalEffects.gold_drop_multipliers.append(1.05)

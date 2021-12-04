@@ -57,6 +57,7 @@ func update_ui():
 	
 	if Resources.resources["gold"] >= current_house_price["gold"]:
 		house_build_button.disabled = false
+		house_gold_label.self_modulate = Color(1.0,1.0,1.0)
 	else:
 		house_build_button.disabled = true
 		house_gold_label.self_modulate = Color(1.0,0.2,0.2)

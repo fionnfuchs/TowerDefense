@@ -37,8 +37,7 @@ func _process(delta):
 func cast_spell1():
 	if Resources.resources.gold >= 25:
 		Resources.resources.gold -= 25
-		
-		GlobalEffects.tower_speed_multipliers.append(1.2)
+
 		GlobalEffects.enemy_health_multipliers.append(1.15)
 		
 		print("Spell 1 casted")
@@ -49,7 +48,6 @@ func cast_spell2():
 	if Resources.resources.gold >= 25:
 		Resources.resources.gold -= 25
 		
-		GlobalEffects.tower_damage_multipliers.append(1.25)
 		GlobalEffects.enemy_speed_multipliers.append(1.2)
 		
 		print("Spell 2 casted")

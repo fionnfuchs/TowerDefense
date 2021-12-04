@@ -6,12 +6,14 @@ func _ready():
 	pass
 
 func interact():
-	for i in range(rand_range(5,15)):
-		var gold_pickup = Scenes.gold_pickup.instance()
-		gold_pickup.position.x = position.x - 16 + rand_range(0,32)
-		gold_pickup.position.y = position.y - 16 + rand_range(0,32)
-		self.get_parent().add_child(gold_pickup)
-		
+	for i in range(rand_range(5,20)):
+		var r = rand_range(0,100)
+		var pickup = Scenes.gold_pickup.instance()
+		if r < 50:
+			pickup = Scenes.crystal_pickup.instance()
+		pickup.position.x = position.x - 20 + rand_range(0,40)
+		pickup.position.y = position.y - 20 + rand_range(0,40)
+		self.get_parent().add_child(pickup)
 	
 	queue_free()
 
