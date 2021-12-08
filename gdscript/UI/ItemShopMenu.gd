@@ -20,9 +20,13 @@ onready var item_3_description_label = $Item3/Description
 onready var item_3_cost_label = $Item3/CostLabel
 onready var item_3_buy_button = $Item3/BuyButton
 
+onready var reroll_button = $RerollButton
+
 var item_1_id = 1
-var item_2_id = 0
+var item_2_id = 1
 var item_3_id = 0
+
+var reroll_cost = 5
 
 var rng = RandomNumberGenerator.new()
 
@@ -34,6 +38,8 @@ func _ready():
 	item_2_buy_button.connect("button_up", self, "buy_item_2")
 	item_3_buy_button.connect("button_up", self, "buy_item_3")
 	
+	reroll_button.connect("button_up", self, "reroll_button_pressed")
+	
 	Signals.connect("wave_beaten", self, "on_wave_beaten")
 	Signals.connect("gold_updated", self, "update_exclamation_symbol")
 
@@ -43,6 +49,12 @@ func _process(delta):
 	else:
 		self.visible = false
 	
+	if Resources.resources["gold"] >= reroll_cost:
+		reroll_button.disabled = false
+	else:
+		reroll_button.disabled = true
+	
+	reroll_button.text = "Reroll for " + str(reroll_cost) + " gold"
 	
 	if item_1_id == 0:
 		item_1_name_label.text = "No item available"
@@ -114,6 +126,7 @@ func buy_item_3():
 		update_exclamation_symbol()
 
 func on_wave_beaten(wave_number):
+	reroll_cost = 5
 	if wave_number > 5:
 		if wave_number % 6 == 0:
 			reroll_item_1()
@@ -125,6 +138,14 @@ func update_exclamation_symbol():
 		Entities.item_shop.exclamation_symbol.visible = true
 	else:
 		Entities.item_shop.exclamation_symbol.visible = false
+
+func reroll_button_pressed():
+	if Resources.resources["gold"] >= reroll_cost:
+		reroll_item_1()
+		reroll_item_2()
+		Resources.resources["gold"] -= reroll_cost
+		reroll_cost += 5
+		update_exclamation_symbol()
 
 func reroll_item_1():
 	item_1_id = rng.randi_range(1,5)

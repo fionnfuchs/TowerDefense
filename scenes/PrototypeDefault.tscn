@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://gdscript/Player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Path/SimplePath.tscn" type="PackedScene" id=2]
@@ -48,6 +48,7 @@
 [ext_resource path="res://sprites/prototype/ui/f_button.png" type="Texture" id=46]
 [ext_resource path="res://sprites/prototype/druids.png" type="Texture" id=47]
 [ext_resource path="res://gdscript/UI/SkillMenu.gd" type="Script" id=48]
+[ext_resource path="res://sprites/prototype/lock.png" type="Texture" id=49]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -816,7 +817,6 @@ __meta__ = {
 }
 
 [node name="ItemShopMenu" type="Panel" parent="CanvasLayer"]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.7
 anchor_right = 0.5
@@ -1049,6 +1049,19 @@ text = "Item name"
 align = 1
 valign = 1
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ItemShopMenu/Item3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+texture = ExtResource( 49 )
+expand = true
+stretch_mode = 6
+
 [node name="CancelButton" type="Button" parent="CanvasLayer/ItemShopMenu"]
 self_modulate = Color( 1, 0.541176, 0.541176, 1 )
 anchor_left = 0.5
@@ -1056,11 +1069,26 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -79.6251
-margin_top = -15.3715
+margin_top = -12.2953
 margin_right = 80.3749
-margin_bottom = 4.62854
+margin_bottom = 7.7047
 custom_fonts/font = ExtResource( 19 )
 text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RerollButton" type="Button" parent="CanvasLayer/ItemShopMenu"]
+self_modulate = Color( 1, 0.784314, 0.329412, 1 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -192.463
+margin_top = -12.1006
+margin_right = -30.8666
+margin_bottom = 7.89941
+text = "Reroll for 100 gold"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1145,6 +1173,7 @@ margin_bottom = 60.1558
 text = "Fast Forward"
 
 [node name="NotificationPanel" type="Panel" parent="CanvasLayer"]
+visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -250.0
@@ -1256,6 +1285,7 @@ __meta__ = {
 }
 
 [node name="SkillMenu" type="Panel" parent="CanvasLayer"]
+visible = false
 self_modulate = Color( 1, 0.356863, 0.898039, 1 )
 anchor_left = 0.5
 anchor_top = 0.7
