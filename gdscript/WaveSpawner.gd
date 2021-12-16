@@ -7,10 +7,10 @@ onready var parent = get_parent()
 # {DEFAULT, PROB:[ENEMY_SCENE, CHANCE]}
 
 var wave_types = [
-	{"default": Scenes.simple_enemy, "probabilities": [], "repeat": 3},
+	{"default": Scenes.simple_enemy, "probabilities": [], "repeat": 4},
 	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.fast_enemy, 0.3]], "repeat": 4},
-	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.fast_enemy, 0.2], [Scenes.tank_enemy, 0.1]], "repeat": 5},
-	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.simple_enemy_stronger, 0.4]], "repeat": 1},
+	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.fast_enemy, 0.2], [Scenes.tank_enemy, 0.1]], "repeat": 6},
+	{"default": Scenes.simple_enemy, "probabilities": [[Scenes.simple_enemy_stronger, 0.4]], "repeat": 4},
 	{"default": Scenes.simple_enemy_stronger, "probabilities": [[Scenes.fast_enemy, 0.3], [Scenes.tank_enemy, 0.2]], "repeat": 2},
 	{"default": Scenes.simple_enemy_stronger, "probabilities": [[Scenes.fast_enemy, 0.3], [Scenes.tank_enemy_2, 0.1]], "repeat": 2},
 ]
@@ -71,5 +71,5 @@ func spawn_enemy(position_index, enemy_scene):
 	
 	var enemy_instance = enemy_scene.instance()
 	parent.add_child(enemy_instance)
-	enemy_instance.position = Vector2(spawn_position.x, spawn_position.y + position_index * 32)
+	enemy_instance.position = Vector2(spawn_position.x, spawn_position.y + position_index * 36)
 	enemy_instance.update_navigation()

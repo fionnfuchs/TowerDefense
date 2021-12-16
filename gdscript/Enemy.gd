@@ -20,6 +20,8 @@ var target = Vector2(8,-32)
 
 var path = null
 
+var frozen_time = 0.0
+
 func _ready():
 	Entities.enemies.append(self)
 	self.max_hp = max_hp * GlobalEffects.get_total_enemy_health_multiplier() + (max_hp/55) * floor(Difficulty.difficulty)
@@ -50,6 +52,13 @@ func die():
 func _physics_process(delta):
 	if GameState.game_state == 1:
 		process_movement()
+		
+		if "FROZEN" in buffs:
+			frozen_time += delta
+			if frozen_time > 3:
+				buffs.erase("FROZEN")
+				frozen_time = 0
+			
 
 func _process(delta):
 	healthbar.scale.x = float(hp) / max_hp
@@ -62,21 +71,22 @@ func process_movement():
 		var distance_to_next = position.distance_to(path[0])
 		if distance_to_next < 1:
 			path.remove(0)
-		
-	if path and len(path) > 0:
-		var direction = path[0] - position
-		direction = direction.normalized()
-		if not "SLOWDOWN" in buffs:
-			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * GameState.time_speed / 50)
-		else:
-			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() / 1.6 * GameState.time_speed / 50)
 	
-	if !path or len(path) == 0:
-		var direction = target - position
-		if not "SLOWDOWN" in buffs:
-			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * GameState.time_speed / 50)
-		else:
-			move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() / 1.6 * GameState.time_speed / 50)
+	if not "FROZEN" in buffs:
+		if path and len(path) > 0:
+			var direction = path[0] - position
+			direction = direction.normalized()
+			if not "SLOWDOWN" in buffs:
+				move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * GameState.time_speed / 50)
+			else:
+				move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() / 1.6 * GameState.time_speed / 50)
+		
+		if !path or len(path) == 0:
+			var direction = target - position
+			if not "SLOWDOWN" in buffs:
+				move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() * GameState.time_speed / 50)
+			else:
+				move_and_slide(direction * movement_speed * GlobalEffects.get_total_enemy_speed_effect() / 1.6 * GameState.time_speed / 50)
 
 func get_hit(damage):
 	hitsound.play()

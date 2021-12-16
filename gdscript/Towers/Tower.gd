@@ -131,6 +131,14 @@ func update_tower_stats_by_item():
 	elif equipped_item == 5:
 		attention_radius = 75
 		update_attention_radius()
+	elif equipped_item == 6:
+		bullet_damage = 4.5
+	elif equipped_item == 7:
+		bullet_buffs = ["ICE"]
+	elif equipped_item == 8:
+		bullet_buffs = ["GOLDDROPPER"]
+	elif equipped_item == 9:
+		bullet_buffs = ["CRYSTALDROPPER"]
 
 func update_attention_radius():
 	attention_area.get_node("CollisionShape2D").get_shape().set_radius(attention_radius)

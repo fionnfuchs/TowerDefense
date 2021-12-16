@@ -23,7 +23,7 @@ onready var item_3_buy_button = $Item3/BuyButton
 onready var reroll_button = $RerollButton
 
 var item_1_id = 1
-var item_2_id = 1
+var item_2_id = 2
 var item_3_id = 0
 
 var reroll_cost = 5
@@ -148,11 +148,11 @@ func reroll_button_pressed():
 		update_exclamation_symbol()
 
 func reroll_item_1():
-	item_1_id = rng.randi_range(1,5)
+	item_1_id = rng.randi_range(1,9)
 	update_exclamation_symbol()
 
 func reroll_item_2():
-	item_2_id = rng.randi_range(1,5)
+	item_2_id = rng.randi_range(1,9)
 	update_exclamation_symbol()
 
 func can_buy_item():

@@ -38,6 +38,7 @@ func update_sprite():
 		self.get_node("Sprite").texture = Scenes.bomb_bullet_texture
 
 func hit_target():
+	randomize()
 	if target.has_method("get_hit"):
 		target.get_hit(self.damage * GlobalEffects.get_total_tower_damage_multiplier())
 		var hit_instance = Scenes.simple_hit.instance()
@@ -55,4 +56,18 @@ func hit_target():
 		explosion_instance.position = self.position
 		get_parent().add_child(explosion_instance)
 		Signals.emit_signal("play_global_sound", "Explosion")
+	if has_buff("ICE") and target.has_method("set_buff"):
+		target.set_buff("FROZEN")
+	if has_buff("GOLDDROPPER"):
+		var r = rand_range(0,100)
+		if r < 25:
+			var pickup = Scenes.gold_pickup.instance()
+			pickup.position = self.position
+			self.get_parent().add_child(pickup)
+	if has_buff("CRYSTALDROPPER"):
+		var r = rand_range(0,100)
+		if r < 25:
+			var pickup = Scenes.crystal_pickup.instance()
+			pickup.position = self.position
+			self.get_parent().add_child(pickup)
 	queue_free()

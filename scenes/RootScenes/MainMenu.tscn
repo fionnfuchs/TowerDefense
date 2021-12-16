@@ -98,6 +98,7 @@ autoplay = "LogoAnimation"
 anims/LogoAnimation = SubResource( 1 )
 
 [node name="PathNavigation2D" parent="." instance=ExtResource( 5 )]
+visible = false
 position = Vector2( 500, 200 )
 
 [node name="Home" parent="." instance=ExtResource( 6 )]
